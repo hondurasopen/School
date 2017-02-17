@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data>
+<menuitem id="school_menu_main" name="School" string="School" sequence="20"  web_icon="comercial,static/description/icon.png"/>
+<menuitem id="school_menu_student" name="Gestión de Estudiantes" string="Gestión de Estudiantes" parent="school_menu_main" sequence="100"/>
+<menuitem id="school_menu_teacher" name="Gestion de calificaciones" string="Gestion de calificaciones" parent="school_menu_main" sequence="200"/>
+
+<menuitem id="school_config" name="Configuration" string="Configuration" parent="school_menu_main" sequence="300"/>
+    
+</data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <!-- Sequences for hr.employee --> 
+        <record id="seq_curso_type" model="ir.sequence.type">
+            <field name="name">Curso ID</field>
+            <field name="code">curso</field>
+        </record>
+        <record id="seq_curso_type1" model="ir.sequence">
+            <field name="name">Curso ID</field>
+            <field name="code">curso</field>
+            <field name="prefix">Curso. </field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</openerp>

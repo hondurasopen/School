@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+  <!-- Vista Formulario de Section-->
+   <record model="ir.ui.view" id="school_section_form_view">
+   <field name="name">school.section.form</field>
+   <field name="model">school.sections</field>
+   <field name="arch" type="xml">
+     <form string="Formulario de secciones">
+		<header>
+	<field name="state" widget="statusbar" nolabel="1" clickable="1"/>
+	</header>				
+          <sheet>  
+           <h1>
+              <field name="name" placeholder="Nombre de Sección..." class="oe_inline"/>
+          </h1>
+	<separator string="Information"/>
+          <group colspan="4">
+		<group cols="2">  
+			<field name="start_date"/>
+               	 	<field name="end_date"/>
+		</group>
+		<group cols="2">  
+			<field name="course_id"/>
+		</group>
+	   </group>		
+	<notebook>
+<page string="Asignaturas">
+	<field name="section_line">
+	<tree editable="bottom">
+		<field name="asignatura_id"/>
+		<field name="maestro_id"/>
+		<field name="name"/>
+	</tree>
+	</field>
+	</page>
+	<page string="Description">
+	<field name="description"/>
+	</page>
+	
+	</notebook>
+	</sheet>     
+     </form>
+   </field> 
+   </record>  
+   <!-- Fin de Vista form  -->
+  <!-- Vista Tree de Section-->
+<record model="ir.ui.view" id="school_section_tree_view">
+   <field name="name">school.section.tree</field>
+   <field name="model">school.sections</field>
+   <field name="arch" type="xml">
+       <tree string="Secciones">
+          <field name="name"/>
+          <field name="start_date"/>
+      		<field name="end_date"/>
+      		<field name="course_id"/>
+      		<field name="state"/>
+      </tree>
+   </field> 
+   </record>
+
+   <!--  Accion para Sections -->
+   <record model="ir.actions.act_window" id="school_sections_action">
+   <field name="name">Secciones</field>
+   <field name="res_model">school.sections</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera seccion</p>
+   </field>
+   </record>
+
+	
+   <!-- Menu Principal de Gestion de sections -->
+<menuitem action="school_sections_action" string="Secciones" id="school_action_section1" parent="school_config" sequence="200"/>
+
+   </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

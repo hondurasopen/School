@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+  <!-- Vista Formulario de Cursos-->
+   <record model="ir.ui.view" id="school_course_form_view">
+   <field name="name">school.course.form</field>
+   <field name="model">school.course</field>
+   <field name="arch" type="xml">
+      <form string="Course Form">				
+          <sheet>  
+                 <h1>
+                    <field name="name" placeholder="Nombre del curso..." class="oe_inline"/>
+                </h1>
+      	<separator string="Información del curso"/>
+        	<group colspan="4">
+      			<group cols="2"> 
+					<field name="activo"/>			
+      			</group>
+      	   </group>		
+           <notebook>
+            	<page string="Sections">
+            	<field name="section_ids" nolabel="1" colspan="4" mode="tree">
+             		<tree string="Sections" editable="bottom" colors="blue:state == 'draft';red:state == 'progress'">
+            			        <field name="name"/>
+            			        <field name="start_date"/>
+                  				<field name="end_date"/>
+                  				<field name="state"/>
+            	  </tree>	
+            	</field>
+            	</page>
+				<page string="Notas">
+  					<field name="description"/>
+				</page>
+            </notebook>          		
+        </sheet>     
+      </form>
+    </field>
+   </record>  
+
+  <!-- Vista Tree de Curso-->
+<record model="ir.ui.view" id="school_course_tree_view">
+   <field name="name">school.course.tree</field>
+   <field name="model">school.course</field>
+   <field name="arch" type="xml">
+       <tree string="List">
+	    <field name="name"/>
+	    <field name="activo"/>
+       </tree>
+   </field>    
+</record>
+
+   <!--  Accion para Cursos -->
+   <record model="ir.actions.act_window" id="school_course_action">
+   <field name="name">Cursos</field>
+   <field name="res_model">school.course</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+   <field name="help" type="html">
+   		<p class="oe_view_nocontent_create">Crear el primer curso</p>
+   </field>
+   </record>
+	
+   <!-- Menu Principal de Gestion de cuotas -->
+
+<menuitem action="school_course_action" id="mngfees_action_course" string="Curso" parent="school_config" sequence="100"/>
+
+   </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

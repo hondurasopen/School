@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+<record model="ir.ui.view" id="estudiante_form_view">
+   <field name="name">estudiante.form</field>
+   <field name="model">res.partner</field>
+   <field name="inherit_id" ref="base.view_partner_form"/>
+   <field name="arch" type="xml">
+		<field name="is_company" position="replace">
+	          <field name="is_company" invisible="1"/>	
+             </field>
+		<field name="website" position="replace">
+	          <field name="website" invisible="1"/>	
+             </field>
+		<field name="function" position="replace">
+	          <field name="function" invisible="1"/>	
+             </field>
+		<field name="fax" position="replace">
+	          <field name="fax" invisible="1"/>	
+             </field>
+	    <field name="title" position="replace">
+	          <field name="title" invisible="1"/>	
+             </field>
+		<field name="parent_id" position="replace">
+	          <field name="parent_id" invisible="1"/>	
+             </field>
+		<field name="email" position="after">
+		<field name="es_estudiante"/>
+		</field>
+ <notebook position="inside">
+    <page string="Datos de Alumno" sequence="1" attrs="{'invisible': [('supplier', '=', True)]}">
+        <group colspan="4">
+        <group cols="2"> 
+            <field name="fecha_nacimiento"/>
+            <field name="edad"/>
+            <field name="partida_nacimiento"/>
+            <field name="caso_emergencia"/>
+        </group>
+        <group cols="2">
+            <field name="genero"/> 
+            <field name="dir_emergencia"/>
+        </group>
+		     </group> 
+                 </page>
+		<page string="Datos Medicos" sequence="3" attrs="{'invisible': [('supplier', '=', True)]}">
+		<separator string="Información médica"/>
+		<p>Padece el alumno (a) de alguna alergia o cualquier otra enfermedad que requiera cuidado y precaución </p>
+		<field name="enfermedad_alumno" placeholder="Escriba la enfermedad que padece el alumno"/>
+		<group colspan="4">
+	          <group cols="2"> 
+			<field name="panadol"/>
+			<field name="peptobismol"/>
+			<field name="agua_oxigenada"/>
+			<field name="anestil"/>
+			<field name="otros"/>
+			</group>
+			 <group cols="2"> 
+			<field name="neobol"/>
+			<field name="mevalgin"/>
+			<field name="mucosolvan"/>
+			<field name="espamotro"/>	
+	          </group>
+		</group>
+		<group colspan="4">
+	               <group cols="2"> 
+			<field name="medico_alumno"/>
+			<field name="tel_clinica"/>
+			</group>
+			<group cols="2"> 
+			<field name="dir_clinica"/>
+			</group>
+		</group>
+		
+		</page>
+		<page string="Padres" sequence="2" attrs="{'invisible': [('supplier', '=', True)]}">
+			<group colspan="4">
+			  <group cols="2">
+			  </group>
+			  <group cols="2"> 
+			</group>
+			</group>
+			<separator string="Información de padres"/>
+                     <group colspan="4">
+	               <group cols="2"> 
+			
+			    <field name="nombre_padre"/>
+			    <field name="ocupacion_padre"/>
+			<field name="tel_padre"/>
+			<field name="lugar_trabajo_padre"/>
+			<field name="email_padre"/>
+			<field name="direccion_padre"/>
+			</group>
+			 <group cols="2"> 
+                            <field name="nombre_madre"/>
+			    <field name="ocupacion_madre"/>
+		            <field name="tel_madre"/>
+			<field name="lugar_trabajo_madre"/>
+			<field name="email_madre"/>
+			<field name="direccion_madre"/>
+			</group>
+		     </group> 
+                 </page>
+		<page string="Transporte" sequence="2" attrs="{'invisible': [('supplier', '=', True)]}">
+		<separator string="Información de transporte"/>
+		<p>PERSONAS AUTORIZADAS PARA RECOGER AL ALUMNO (A) EN LA ESCUELA
+				(INCLUIR A LOS PADRES O ENCARGADOS) </p>
+		<group colspan="4">
+			  <group cols="2">
+			<field name="transporte"/>
+			 </group>
+			 <group cols="2">
+			</group>
+		</group>
+		<group colspan="4">
+			  <group cols="2">
+			<field name="persona_1"/>
+			<field name="persona_2"/>
+			<field name="persona_3"/>
+			 </group>
+			 <group cols="2">
+			<field name="persona_4"/>
+			<field name="persona_5"/>
+			<field name="persona_6"/>
+			</group>
+		</group>
+		<p>Los (las) alumnos (as) serán entregados solamente por las personas antes indicadas.</p>
+		</page>
+</notebook>
+
+          </field>
+</record>
+
+
+<record model="ir.ui.view" id="estudiante_tree_view">
+          <field name="name">estudiante.tree</field>
+          <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+	<field name="arch" type="xml">
+	                 <field name="display_name"  position="after">
+		<field name="genero"/> 
+	   <field name="partida_nacimiento"/>
+			 <field name="nombre_padre"/>
+	    <field name="nombre_madre"/>
+		</field>
+	  
+	 </field>
+</record>
+
+
+<record model="ir.ui.view" id="view_estudiante_search">
+    <field name="name">estudiante.search</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter"/>
+    <field name="arch" type="xml">
+    <field  name="name" position="after">
+        <field name="nombre_padre" string="Nombre padre"/>
+        <field name="nombre_madre" string="Nombre madre"/>
+        <field name="partida_nacimiento" string="Identidad"/>
+    </field>
+    <filter name="type_person" domain="[('is_company','=',0)]" position="after">
+        <filter string="Genero masculino" domain="[('genero','=','masculino')]" name="genero_masculino"/>
+        <filter string="Genero femenino" domain="[('genero','=','femenino')]" name="genero_femenino"/>
+    </filter>
+    </field>
+</record>
+
+<record model="ir.actions.act_window" id="action_estudiante">
+   <field name="name">Estudiante</field>
+   <field name="res_model">res.partner</field>
+   <field name="view_type">form</field>
+   <field name="view_model">kanban,tree,form</field>
+	<field name="domain">[('es_estudiante','=',True)]</field>	
+   <field name="context">{'default_es_estudiante': 1}</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primer alumno</p>
+   </field>
+   </record>
+
+<menuitem name="Alumnos" id="menu_alumnos" parent="school_menu_student" action="action_estudiante" sequence="5"/>
+
+</data>
+</odoo>
+
+
