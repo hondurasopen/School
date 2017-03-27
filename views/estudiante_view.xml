@@ -6,99 +6,114 @@
    <field name="model">res.partner</field>
    <field name="inherit_id" ref="base.view_partner_form"/>
    <field name="arch" type="xml">
-		<field name="is_company" position="replace">
-	          <field name="is_company" invisible="1"/>	
+        <field name="is_company" position="replace">
+             <field name="is_company" invisible="1"/>	
+        </field>
+        <field name="website" position="replace">
+              <field name="website" invisible="1"/>	
              </field>
-		<field name="website" position="replace">
-	          <field name="website" invisible="1"/>	
-             </field>
-		<field name="function" position="replace">
-	          <field name="function" invisible="1"/>	
-             </field>
-		<field name="fax" position="replace">
-	          <field name="fax" invisible="1"/>	
-             </field>
-	    <field name="title" position="replace">
-	          <field name="title" invisible="1"/>	
-             </field>
-		<field name="parent_id" position="replace">
-	          <field name="parent_id" invisible="1"/>	
-             </field>
-		<field name="email" position="after">
-		<field name="es_estudiante"/>
-		</field>
+        <field name="function" position="replace">
+              <field name="function" invisible="1"/>
+        </field>
+        <field name="fax" position="replace">
+              <field name="fax" invisible="1"/>	
+        </field>
+
+        <field name="title" position="replace">
+              <field name="title" invisible="1"/>
+        </field>
+        <field name="parent_id" position="replace">
+              <field name="parent_id" invisible="1"/>
+        </field>
+        <field name="email" position="after">
+            <field name="es_estudiante"/>
+        </field>
+        <field name="email" position="replace">
+                <field name="partida_nacimiento" attrs="{'invisible': [('es_estudiante', '=', False)], 'required': [('es_estudiante', '=', True)]}"/>
+              <field name="email" invisible="1"/>
+        </field>
+        <field name="lang" position="replace">
+              <field name="lang" invisible="1"/>
+        </field>
+
+    <xpath expr="//page[@name='internal_notes']" position="attributes">
+        <attribute name="invisible">[('es_estudiante','=', True)]</attribute>
+    </xpath>
+
+    <xpath expr="//page[@name='sales_purchases']" position="attributes">
+        <attribute name="invisible">[('es_estudiante','=', True)]</attribute>
+    </xpath>
+
  <notebook position="inside">
     <page string="Datos de Alumno" sequence="1" attrs="{'invisible': [('supplier', '=', True)]}">
         <group colspan="4">
-        <group cols="2"> 
-            <field name="fecha_nacimiento"/>
-            <field name="edad"/>
-            <field name="partida_nacimiento"/>
-            <field name="caso_emergencia"/>
-        </group>
+            <group cols="2"> 
+                <field name="fecha_nacimiento"/>
+                <field name="edad"/>
+                <field name="section_id" />
+            </group>
         <group cols="2">
             <field name="genero"/> 
+			<field name="caso_emergencia"/>
             <field name="dir_emergencia"/>
         </group>
-		     </group> 
-                 </page>
-		<page string="Datos Medicos" sequence="3" attrs="{'invisible': [('supplier', '=', True)]}">
-		<separator string="Información médica"/>
-		<p>Padece el alumno (a) de alguna alergia o cualquier otra enfermedad que requiera cuidado y precaución </p>
-		<field name="enfermedad_alumno" placeholder="Escriba la enfermedad que padece el alumno"/>
-		<group colspan="4">
-	          <group cols="2"> 
-			<field name="panadol"/>
-			<field name="peptobismol"/>
-			<field name="agua_oxigenada"/>
-			<field name="anestil"/>
-			<field name="otros"/>
-			</group>
-			 <group cols="2"> 
-			<field name="neobol"/>
-			<field name="mevalgin"/>
-			<field name="mucosolvan"/>
-			<field name="espamotro"/>	
-	          </group>
-		</group>
-		<group colspan="4">
-	               <group cols="2"> 
-			<field name="medico_alumno"/>
-			<field name="tel_clinica"/>
-			</group>
-			<group cols="2"> 
-			<field name="dir_clinica"/>
-			</group>
-		</group>
-		
-		</page>
-		<page string="Padres" sequence="2" attrs="{'invisible': [('supplier', '=', True)]}">
-			<group colspan="4">
-			  <group cols="2">
-			  </group>
-			  <group cols="2"> 
-			</group>
-			</group>
-			<separator string="Información de padres"/>
-                     <group colspan="4">
-	               <group cols="2"> 
-			
-			    <field name="nombre_padre"/>
-			    <field name="ocupacion_padre"/>
-			<field name="tel_padre"/>
-			<field name="lugar_trabajo_padre"/>
-			<field name="email_padre"/>
-			<field name="direccion_padre"/>
-			</group>
-			 <group cols="2"> 
-                            <field name="nombre_madre"/>
-			    <field name="ocupacion_madre"/>
-		            <field name="tel_madre"/>
-			<field name="lugar_trabajo_madre"/>
-			<field name="email_madre"/>
-			<field name="direccion_madre"/>
-			</group>
-		     </group> 
+        </group> 
+    </page>
+    <page string="Datos Medicos" sequence="3" attrs="{'invisible': [('supplier', '=', True)]}">
+        <separator string="Información médica"/>
+            <p>Padece el alumno (a) de alguna alergia o cualquier otra enfermedad que requiera cuidado y precaución </p>
+        <field name="enfermedad_alumno" placeholder="Escriba la enfermedad que padece el alumno"/>
+        <group colspan="4">
+            <group cols="2"> 
+                <field name="panadol"/>
+                <field name="peptobismol"/>
+                <field name="agua_oxigenada"/>
+                <field name="anestil"/>
+                <field name="otros"/>
+            </group>
+            <group cols="2"> 
+                <field name="neobol"/>
+                <field name="mevalgin"/>
+                <field name="mucosolvan"/>
+                <field name="espamotro"/>	
+              </group>
+        </group>
+        <group colspan="4">
+            <group cols="2"> 
+                <field name="medico_alumno"/>
+                <field name="tel_clinica"/>
+            </group>
+            <group cols="2"> 
+                <field name="dir_clinica"/>
+            </group>
+        </group>
+    </page>
+    <page string="Padres" sequence="2" attrs="{'invisible': [('supplier', '=', True)]}">
+            <group colspan="4">
+                <group cols="2">
+                </group>
+                <group cols="2"> 
+                </group>
+            </group>
+            <separator string="Información de padres"/>
+                <group colspan="4">
+                   <group cols="2"> 
+                    <field name="nombre_padre"/>
+                     <field name="ocupacion_padre"/>
+            <field name="tel_padre"/>
+            <field name="lugar_trabajo_padre"/>
+            <field name="email_padre"/>
+            <field name="direccion_padre"/>
+        </group>
+            <group cols="2"> 
+            <field name="nombre_madre"/>
+            <field name="ocupacion_madre"/>
+                <field name="tel_madre"/>
+                <field name="lugar_trabajo_madre"/>
+                <field name="email_madre"/>
+                <field name="direccion_madre"/>
+                </group>
+                 </group> 
                  </page>
 		<page string="Transporte" sequence="2" attrs="{'invisible': [('supplier', '=', True)]}">
 		<separator string="Información de transporte"/>
@@ -106,7 +121,7 @@
 				(INCLUIR A LOS PADRES O ENCARGADOS) </p>
 		<group colspan="4">
 			  <group cols="2">
-			<field name="transporte"/>
+			<field name="transporte" attrs="{'required': [('es_estudiante', '=', True)]}"/>
 			 </group>
 			 <group cols="2">
 			</group>

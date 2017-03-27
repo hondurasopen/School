@@ -1,0 +1,11 @@
+model_id:id,group_id:id,id,name,perm_read,perm_write,perm_create,perm_unlink
+model_school_course,england_school_manager,england_school_manager,england_school_manager,1,1,1,1
+model_school_course,england_school_user,england_school_user,england_school_user,1,0,0,0
+model_school_course_line,england_school_manager,england_school_manager,england_school_manager,1,1,1,1
+model_school_course_line,england_school_user,england_school_user,england_school_user,1,0,0,0
+model_school_sections,england_school_manager,england_school_manager,england_school_manager,1,1,1,1
+model_school_sections,england_school_user,england_school_user,england_school_user,1,0,0,0
+model_school_sections_line,england_school_manager,england_school_manager,england_school_manager,1,1,1,1
+model_school_sections_line,england_school_user,england_school_user,england_school_user,1,0,0,0
+model_school_asignatura,england_school_manager,england_school_manager,england_school_manager,1,1,1,1
+model_school_asignatura,england_school_user,england_school_user,england_school_user,1,0,0,0

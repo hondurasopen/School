@@ -11,8 +11,9 @@ class Estudiante(models.Model):
     es_estudiante = fields.Boolean("Es estudiante")
     fecha_nacimiento = fields.Date("Fecha de Nacimiento", translate=True)
     edad = fields.Integer("Edad de estudiante", translate=True)
-    partida_nacimiento = fields.Char("Número de Identidad", required=True)
-    genero = fields.Selection([('masculino', 'Masculino'), ('femenino', 'Femenino')], string='Genero', required=True, translate=True)
+    partida_nacimiento = fields.Char("Número de Identidad")
+    genero = fields.Selection([('masculino', 'Masculino'), ('femenino', 'Femenino')], string='Genero')
+    section_id = fields.Many2one("school.sections", "Sección")
     # Informaciión de padre
     nombre_padre = fields.Char("Padre o Encargado", translate=True)
     ocupacion_padre = fields.Char("Profesión/Ocupación de padre", translate=True)
@@ -35,7 +36,7 @@ class Estudiante(models.Model):
     tel_clinica = fields.Char("Telefono de clinica")
 
     # Información de transporte
-    transporte = fields.Selection([('vehiculo', 'Automovil'), ('bus', 'Bus'), ('caminando', 'Caminando')], string='Transporte', required=True)
+    transporte = fields.Selection([('vehiculo', 'Automovil'), ('bus', 'Bus'), ('caminando', 'Caminando')], string='Transporte')
     persona_1 = fields.Char("Persona autorizada")
     persona_2 = fields.Char("Persona autorizada")
     persona_3 = fields.Char("Persona autorizada")

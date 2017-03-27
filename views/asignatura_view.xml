@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+  <!-- Vista Formulario de Section-->
+   <record model="ir.ui.view" id="school_asignatura_form_view">
+   <field name="name">school.asignatura.form</field>
+   <field name="model">school.asignatura</field>
+   <field name="arch" type="xml">
+     <form string="Formulario de secciones">			
+          <sheet>  
+           <h1>
+              <field name="name" placeholder="Nombre de asignatura..." class="oe_inline"/>
+          </h1>
+	<group colspan="4">
+        <group cols="2"> 
+            <field name="nivel"/>
+			<field name="home_teacher" attrs="{'invisible': [('nivel', '=', 'media')]}"/>
+        </group>
+		  <group cols="2"> 
+            <field name="area_asignatura"/>
+        </group>
+    </group>		
+	<notebook>
+      <page string="Asignación de maestros" attrs="{'invisible': [('nivel', 'in', ['prebasica', 'basica']), '|', ('home_teacher','=', True)]}">
+	<field name="asignatura_line">
+	<tree editable="top">
+	<field name="catedratico_id"/>
+	</tree>
+	</field>
+      </page>
+	</notebook>
+	<separator string="Notas Generales"/>
+	<field name="description" placeholder="Nombre generales de asignaturas..."/>
+	</sheet>     
+     </form>
+   </field> 
+   </record>  
+   <!-- Fin de Vista form  -->
+  <!-- Vista Tree de Section-->
+<record model="ir.ui.view" id="school_asignatura_tree_view">
+   <field name="name">school.asignatura.tree</field>
+   <field name="model">school.asignatura</field>
+   <field name="arch" type="xml">
+       <tree string="Secciones">
+          <field name="name"/>
+		  <field name="nivel"/>
+          <field name="area_asignatura"/>
+      </tree>
+   </field> 
+   </record>
+
+   <!--  Accion para Sections -->
+   <record model="ir.actions.act_window" id="school_asignatura_action_pre">
+   <field name="name">Asignaturas</field>
+   <field name="res_model">school.asignatura</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+   <field name="domain">[('nivel','=','prebasica')]</field>
+	<field name="context">{'default_nivel': 'prebasica','default_home_teacher': 1}</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera asignaturas</p>
+   </field>
+   </record>
+
+<!--  Accion para Sections -->
+   <record model="ir.actions.act_window" id="school_asignatura_action_basica">
+   <field name="name">Asignaturas</field>
+   <field name="res_model">school.asignatura</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+   <field name="domain">[('nivel','=','basica')]</field>
+	<field name="context">{'default_nivel': 'basica', 'default_home_teacher': 1}</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera asignaturas</p>
+   </field>
+   </record>
+
+<!--  Accion para Sections -->
+   <record model="ir.actions.act_window" id="school_asignatura_action_high">
+   <field name="name">Asignaturas</field>
+   <field name="res_model">school.asignatura</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+   <field name="domain">[('nivel','=','media')]</field>
+	<field name="context">{'default_nivel': 'media'}</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera asignaturas</p>
+   </field>
+   </record>
+
+
+	
+   <!-- Menu Principal de Gestion de sections -->
+<menuitem string="Asignaturas" id="school_asignatura_main" name="Gestión de Asignaturas" parent="school_menu_main" sequence="50"/>
+
+<menuitem action="school_asignatura_action_pre" string="Asignaturas Pre-Básica" id="school_action_asignatura1" name="Asignaturas Pre-Básica" parent="school_asignatura_main" sequence="10"/>
+
+<menuitem action="school_asignatura_action_basica" string="Asignaturas Primaria" id="school_action_asignatura2" name="Asignaturas Primaria" parent="school_asignatura_main" sequence="20"/>
+
+<menuitem action="school_asignatura_action_high" string="Asignaturas Media" id="school_asignatura_media" name="Asignaturas Media" parent="school_asignatura_main" sequence="30"/>
+
+
+
+   </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

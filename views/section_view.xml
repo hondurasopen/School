@@ -8,31 +8,47 @@
    <field name="arch" type="xml">
      <form string="Formulario de secciones">
 		<header>
-	<field name="state" widget="statusbar" nolabel="1" clickable="1"/>
+	<button name="action_section_progress" type="object" string="Habilitar Sección" states="draft,done" class="oe_highlight oe_read_only"/>
+<button name="action_section_draft" type="object" string="Borrador" states="cancel" class="oe_highlight oe_read_only"/>
+<button name="action_section_cancel" type="object" string="Cancelar Sección" states="progress" class="oe_highlight oe_read_only"/>
+<button name="action_section_done" type="object" string="Finalizar Sección" states="draft,progress" class="oe_highlight oe_read_only"/>
+		<field name="state" widget="statusbar" nolabel="1" clickable="1"/>
 	</header>				
-          <sheet>  
-           <h1>
-              <field name="name" placeholder="Nombre de Sección..." class="oe_inline"/>
-          </h1>
-	<separator string="Information"/>
-          <group colspan="4">
+  <sheet>  
+   <h1>
+      <field name="name" placeholder="Nombre de Sección..." class="oe_inline"/>
+  </h1>
+	<separator string="Información"/>
+    <group colspan="4">
 		<group cols="2">  
 			<field name="start_date"/>
-               	 	<field name="end_date"/>
-		</group>
-		<group cols="2">  
-			<field name="course_id"/>
-		</group>
-	   </group>		
+			<field name="end_date"/>
+	</group>
+	<group cols="2"> 
+			<field name="course_id" options="{'no_create': True}"/>
+			<field name="prebasica" invisible="1"/>
+			<field name="maestro_guia" attrs="{'invisible': [('prebasica','=',False)], 'required': [('prebasica','=',True)]}"/>
+			<button name="asignar_clases" class="oe_highlight" string="Asignar clases" type="object" attrs="{'invisible': ['|',('state','in',['progress','done']) ]}"/>
+	</group>
+	</group>		
 	<notebook>
-<page string="Asignaturas">
+	<page string="Asignaturas">
 	<field name="section_line">
 	<tree editable="bottom">
-		<field name="asignatura_id"/>
-		<field name="maestro_id"/>
+		<field name="asignatura_id" required="1" readonly="1"/>
+		<field name="maestro_id" required="1" domain="[('es_catadratico','=',True)]" />
 		<field name="name"/>
 	</tree>
 	</field>
+	</page>
+	<page string="Alumnos">
+		<field name="alumnos_ids">
+		<tree editable="top">
+			<field name="name"/>
+			<field name="partida_nacimiento"/>
+			<field name="genero"/>
+		</tree>
+		</field>
 	</page>
 	<page string="Description">
 	<field name="description"/>
@@ -49,7 +65,7 @@
    <field name="name">school.section.tree</field>
    <field name="model">school.sections</field>
    <field name="arch" type="xml">
-       <tree string="Secciones">
+       <tree string="Secciones" colors="blue:state == 'draft';green:state=='progress';red:state == 'cancel'">
           <field name="name"/>
           <field name="start_date"/>
       		<field name="end_date"/>
@@ -72,7 +88,7 @@
 
 	
    <!-- Menu Principal de Gestion de sections -->
-<menuitem action="school_sections_action" string="Secciones" id="school_action_section1" parent="school_config" sequence="200"/>
+<menuitem action="school_sections_action" string="Secciones" id="school_action_section1" parent="school_config" sequence="10"/>
 
    </data>
 </odoo>

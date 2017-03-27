@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="england_school_manager" model="res.groups">
+            <field name="name">Administrador school</field>
+        </record>
+
+        <record id="england_school_user" model="res.groups">
+            <field name="name">Usuario restringido school</field>
+        </record>
+    </data>
+</odoo>

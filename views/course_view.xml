@@ -6,33 +6,47 @@
    <field name="name">school.course.form</field>
    <field name="model">school.course</field>
    <field name="arch" type="xml">
-      <form string="Course Form">				
+      <form string="Course Form">
           <sheet>  
                  <h1>
-                    <field name="name" placeholder="Nombre del curso..." class="oe_inline"/>
+                    <field name="name" placeholder="Nombre del curso o grado..." class="oe_inline"/>
                 </h1>
-      	<separator string="Información del curso"/>
-        	<group colspan="4">
-      			<group cols="2"> 
-					<field name="activo"/>			
-      			</group>
-      	   </group>		
-           <notebook>
-            	<page string="Sections">
-            	<field name="section_ids" nolabel="1" colspan="4" mode="tree">
-             		<tree string="Sections" editable="bottom" colors="blue:state == 'draft';red:state == 'progress'">
-            			        <field name="name"/>
-            			        <field name="start_date"/>
-                  				<field name="end_date"/>
-                  				<field name="state"/>
-            	  </tree>	
-            	</field>
-            	</page>
-				<page string="Notas">
-  					<field name="description"/>
-				</page>
-            </notebook>          		
-        </sheet>     
+      <separator string="Información del grado/curso"/>
+      <group colspan="4">
+        <group cols="2"> 
+            <field name="activo"/>
+        </group>
+		 <group cols="2"> 
+            <field name="nivel"/>
+        </group>
+      </group>
+      <notebook>
+          <page string="Asignaturas">
+              <field name="curso_line" context="{'nivel': nivel}">
+                  <tree string="Asignaturas" editable="bottom">
+                      <field name="asignatura_id" options="{'no_create': True}" domain="[('nivel','=',nivel)]"/>
+                      <field name="name"/>
+                  </tree>
+              </field>
+          </page>
+         <page string="Secciones">
+            <field name="section_ids" nolabel="1" colspan="4" mode="tree">
+                <tree string="Secciones" editable="bottom" colors="blue:state == 'draft';red:state == 'progress'">
+                    <field name="name"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                </tree>	
+           </field>
+        </page>
+        <page string="Descripción">
+            <field name="description"/>
+        </page>
+        </notebook>
+      </sheet>
+		<div class="oe_chatter">
+            <field name="message_ids" widget="mail_thread"/>
+    	</div>   
       </form>
     </field>
    </record>  
@@ -44,6 +58,7 @@
    <field name="arch" type="xml">
        <tree string="List">
 	    <field name="name"/>
+		<field name="nivel"/>
 	    <field name="activo"/>
        </tree>
    </field>    
@@ -51,7 +66,7 @@
 
    <!--  Accion para Cursos -->
    <record model="ir.actions.act_window" id="school_course_action">
-   <field name="name">Cursos</field>
+   <field name="name">Grado/Cursos</field>
    <field name="res_model">school.course</field>
    <field name="view_type">form</field>
    <field name="view_model">tree,form</field>
@@ -62,7 +77,7 @@
 	
    <!-- Menu Principal de Gestion de cuotas -->
 
-<menuitem action="school_course_action" id="mngfees_action_course" string="Curso" parent="school_config" sequence="100"/>
+<menuitem action="school_course_action" id="mngfees_action_course" string="Grados/Curos" name="Grados/Curos" parent="school_config" sequence="100"/>
 
    </data>
 </odoo>

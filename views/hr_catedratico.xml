@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+<data>
+ <!-- Vista Formulario de asignaturas-->
+   <record model="ir.ui.view" id="school_catedratico_form_view">
+   <field name="name">school.hr.employee.form</field>
+   <field name="model">hr.employee</field>
+   <field name="inherit_id" ref="hr.view_employee_form"/>
+   <field name="arch" type="xml">		
+              <field name="user_id" position="after">
+					<field name="es_catadratico"/>
+					<field name="maestro_guia"/>
+				</field>
+   </field> 
+   </record>  
+
+ <!--  Accion para asignaturas -->
+   <record model="ir.actions.act_window" id="school_catedratico_action">
+   <field name="name">Catedratico</field>
+   <field name="res_model">hr.employee</field>
+   <field name="view_type">form</field>
+   <field name="view_mode">tree,form</field>
+	<field name="domain">[('es_catadratico','=',True)]</field>	
+	<field name="context">{'default_es_catadratico':1}</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera seccion</p>
+   </field>
+   </record>
+
+	
+   <!-- Menu Principal de Gestion de sections -->
+
+<menuitem string="Gestión de Catedráticos" id="school_maestros_main" name="Gestión de Catedráticos" parent="school_menu_main" sequence="100"/>
+
+<menuitem action="school_catedratico_action" string="Catedraticos" name="Catedraticos" id="school_action_catedratico" parent="school_maestros_main" sequence="200"/>
+
+
+</data>
+</openerp>
+
+

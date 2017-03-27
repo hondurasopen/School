@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+  <!-- Vista Formulario de Cursos-->
+   <record model="ir.ui.view" id="school_notas_form_view">
+   <field name="name">school.notas.form</field>
+   <field name="model">school.notas</field>
+   <field name="arch" type="xml">
+      <form string="Notas Form">
+		<header>
+<button name="action_nota_draft" type="object" string="Borrador" states="progress" class="oe_highlight oe_read_only"/>
+<button name="action_nota_progress" type="object" string="Registro en progreso" states="draft" class="oe_highlight oe_read_only"/>
+<button name="action_nota_done" type="object" string="Finalizar registro" states="progress" class="oe_highlight oe_read_only"/>
+		<field name="state" widget="statusbar" nolabel="1" clickable="1"/>
+	</header>
+      <sheet>  
+      <separator string="Registro de notas"/>
+      <group colspan="4">
+        <group cols="2"> 
+            <field name="maestro_id"/>
+			<field name="prebasica" invisible="1"/>
+			<field name="nivel_grado" readonly="True"/>
+        </group>
+		 <group cols="2"> 
+            <field name="seccion_id" domain="[('maestro_guia','=',maestro_id)]" attrs="{'invisible': [('prebasica','=',False)], 'required': [('prebasica','=',True)]}"/>
+			<field name="section_media_id" attrs="{'invisible': [('prebasica','=',True)]}"/>
+			<field name="alumno_id" attrs="{'invisible': [('prebasica','=',False)], 'required': [('prebasica','=',True)]}" domain="[('section_id','=',seccion_id)]"/>
+		<button name="registrar_notas" class="oe_highlight" string="Registrar" type="object" attrs="{'invisible': ['|',('state','in',['progress','done']) ]}"/>
+        </group>
+      </group>
+      <notebook>
+          <page string="Calificaciones de alumnos">
+              <field name="nota_line_ids">
+                  <tree string="Calificaciones" editable="bottom">
+                      <field name="asignatura_id" options="{'no_create': True}" readonly="1"/>
+                      <field name="alumno_id" options="{'no_create': True}" readonly="1"/>
+					  <field name="nota_parcial1" />
+					  <field name="nivelacion_1"/>
+					  <field name="nota_parcial2" />
+						<field name="nivelacion_2"/>
+					  <field name="nota_parcial3" />
+						<field name="nivelacion_3"/>
+					  <field name="nota_parcial4" />
+						<field name="nivelacion_4"/>
+                  </tree>
+              </field>
+          </page>
+        </notebook>
+      </sheet>
+		<div class="oe_chatter">
+            <field name="message_ids" widget="mail_thread"/>
+    	</div>   
+      </form>
+    </field>
+   </record>  notas_view.xml
+
+  <!-- Vista Tree de Curso-->
+<record model="ir.ui.view" id="school_notas_tree_view">
+   <field name="name">school.notas.tree</field>
+   <field name="model">school.notas</field>
+   <field name="arch" type="xml">
+       <tree string="List">
+	      <field name="maestro_id"/>
+		<field name="prebasica" invisible="1"/>
+		<field name="nivel_grado"/>
+		<field name="alumno_id" attrs="{'invisible': [('nivel_grado','=','media')]}"/>
+		<field name="seccion_id"/>
+		<field name="descripcion"/>
+       </tree>
+   </field>    
+</record>
+
+   <!--  Accion para Notas de secundaria -->
+   <record model="ir.actions.act_window" id="school_notas_action_media">
+   <field name="name">Registro de calificaciones</field>
+   <field name="res_model">school.notas</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+	<field name="domain">[('nivel_grado','=','media')]</field>
+	<field name="context">{'default_nivel_grado': 'media'}</field>
+   <field name="help" type="html">
+   		<p class="oe_view_nocontent_create">Crear el primer calificación</p>
+   </field>
+   </record>
+	 <!--  Accion para Notas primaria -->
+   <record model="ir.actions.act_window" id="school_notas_action_basica">
+   <field name="name">Registro de calificaciones Primaria</field>
+   <field name="res_model">school.notas</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+	<field name="domain">[('nivel_grado','=','basica')]</field>
+	<field name="context">{'default_nivel_grado': 'basica', 'default_prebasica': 1}</field>
+   <field name="help" type="html">
+   		<p class="oe_view_nocontent_create">Crear el primer calificación</p>
+   </field>
+   </record>
+		 <!--  Accion para Notas primaria -->
+   <record model="ir.actions.act_window" id="notas_action_prebasica">
+   <field name="name">Registro de calificaciones Pre-básica</field>
+   <field name="res_model">school.notas</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+	<field name="domain">[('nivel_grado','=','prebasica')]</field>
+	<field name="context">{'default_nivel_grado': 'prebasica'}</field>
+   <field name="help" type="html">
+   		<p class="oe_view_nocontent_create">Crear el primer calificación</p>
+   </field>
+   </record>
+   <!-- Menu Principal de Gestion de cuotas -->
+<menuitem action="school_notas_action_media" id="school_notas_action" string="Calificaciones Secundaria" name="Calificaciones secundaria" parent="school_maestros_main" sequence="30"/>
+
+<menuitem action="school_notas_action_basica" id="school_notas_action_primaria" string="Calificaciones Primaria" name="Calificaciones primaria" parent="school_maestros_main" sequence="20"/>
+
+<menuitem action="notas_action_prebasica" id="school_notas_action_prebasica" string="Calificaciones Pre-Básica" name="Calificaciones Pre-Básica" parent="school_maestros_main" sequence="10"/>
+
+   </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
