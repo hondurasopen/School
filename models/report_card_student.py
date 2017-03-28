@@ -14,7 +14,10 @@ class Reportcard(models.Model):
         string='Parcial')
     report_card_ids = fields.One2many("school.report.card.line", "report_card_id", "Detalle de calificaciones")
     descripcion = fields.Text("Observaciones generales")
-
+    promedio_parcial1 = fields.Float("Promedio Parcial 1")
+    promedio_parcial2 = fields.Float("Promedio Parcial 2")
+    promedio_parcial3 = fields.Float("Promedio Parcial 3")
+    promedio_parcial4 = fields.Float("Promedio Parcial 4")
 
     @api.onchange("student_id")
     def onchangeestudiante(self):
@@ -25,12 +28,47 @@ class Reportcard(models.Model):
             else:
                 raise Warning(_('El estudiante no tiene sección asignada'))
 
+    def generarpromedios(self):
+        nota_parcial = 0.0
+        num_clases = 0
+        if self.parcial == 'primer':
+            for nota in self.report_card_ids:
+                if nota.clase_id.area_asignatura != 'sociabilidad':
+                    nota_parcial += nota.nota_parcial1
+                    num_clases += 1
+            if num_clases > 0:
+                self.promedio_parcial1 = nota_parcial / num_clases
+
+        if self.parcial == 'segundo':
+            for nota in self.report_card_ids:
+                if nota.clase_id.area_asignatura != 'sociabilidad':
+                    nota_parcial += nota.nota_parcial1
+                    num_clases += 1
+            if num_clases > 0:
+                self.promedio_parcial1 = nota_parcial / num_clases
+
+        if self.parcial == 'tercer':
+            for nota in self.report_card_ids:
+                if nota.clase_id.area_asignatura != 'sociabilidad':
+                    nota_parcial += nota.nota_parcial1
+                    num_clases += 1
+            if num_clases > 0:
+                self.promedio_parcial1 = nota_parcial / num_clases
+
+        if self.parcial == 'Cuarto':
+            for nota in self.report_card_ids:
+                if nota.clase_id.area_asignatura != 'sociabilidad':
+                    nota_parcial += nota.nota_parcial1
+                    num_clases += 1
+            if num_clases > 0:
+                self.promedio_parcial1 = nota_parcial / num_clases
+
     def generar_notas(self):
         obj_line_notas = self.env["school.notas.line"].search([('alumno_id', '=', self.student_id.id), ('section_id', '=', self.section_id.id)])
         obj_line_report_line_id = self.env["school.report.card.line"]
         obj_unlink = obj_line_report_line_id.search([('report_card_id', '=', self.id)])
         alumno_nota_obj = self.env["school.report.card"].search([('student_id', '=', self.student_id.id), ('id', '!=', self.id)])
-
+        id_section = False
         if alumno_nota_obj:
             raise Warning(_('El alunno seleccionado ya tiene registros de notas'))
 
@@ -40,21 +78,24 @@ class Reportcard(models.Model):
         if not obj_line_notas:
             raise Warning(_('No se encuentran registros para este estudiante'))
 
-        for section_line in self.section_id:
-        for line in obj_line_notas:
+        for section_line in self.section_id.section_line:
             values = {
                 'report_card_id': self.id,
-                'clase_id': line.asignatura_id.id,
-                'nota_parcial1': line.nota_parcial1,
-                'nivelacion_1': line.nivelacion_1,
-                'nota_parcial2': line.nota_parcial2,
-                'nivelacion_2': line.nivelacion_2,
-                'nota_parcial3': line.nota_parcial3,
-                'nivelacion_3': line.nivelacion_3,
-                'nota_parcial4': line.nota_parcial4,
-                'nivelacion_4': line.nivelacion_4,
+                'clase_id': section_line.asignatura_id.id,
             }
+            for line in obj_line_notas:
+                if section_line.asignatura_id.id == line.asignatura_id.id:
+                    values["nota_parcial1"] = line.nota_parcial1
+                    values["nivelacion_1"] = line.nivelacion_1
+                    values["nota_parcial2"] = line.nivelacion_2
+                    values["nivelacion_2"] = line.nivelacion_2
+                    values["nota_parcial3"] = line.nota_parcial3
+                    values["nivelacion_3"] = line.nivelacion_3
+                    values["nota_parcial4"] = line.nota_parcial4
+                    values["nivelacion_4"] = line.nivelacion_4
             id_section = obj_line_report_line_id.create(values)
+        if id_section:
+            self.generarpromedios()
 
 
 
@@ -62,7 +103,7 @@ class Reportcardline(models.Model):
     _name = "school.report.card.line"
 
     report_card_id = fields.Many2one("school.report.card", "Boleta")
-    clase_id = fields.Many2one("school.asignatura", "Asignatura")
+    clase_id = fields.Many2one("school.asignatura", "Asignatura", required=True)
     nota_parcial1 = fields.Float("Nota Parcial 1")
     nivelacion_1 = fields.Float("Nota Nivelación")
     nota_parcial2 = fields.Float("Nota Parcial 2")
