@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+  <!-- Vista Formulario de Cursos-->
+   <record model="ir.ui.view" id="school_report_card_form_view">
+   <field name="name">school.report.card.form</field>
+   <field name="model">school.report.card</field>
+   <field name="arch" type="xml">
+      <form string="Notas Form">
+	<header>
+		<field name="parcial" widget="statusbar" nolabel="1" clickable="1"/>
+	</header>
+      <sheet>  
+      <separator string="Calificaciones de estudiante"/>
+      <group colspan="4">
+        <group cols="2"> 
+            <field name="student_id"/>
+        </group>
+		 <group cols="2">
+			<field name="grade_id"/>
+			<field name="section_id" domain="[('course_id','=',grade_id)]"/>								
+		<button name="generar_notas" class="oe_highlight" string="Generar Notas" type="object"/>
+        </group>
+      </group>
+      <notebook>
+          <page string="Calificaciones por parcial">
+              <field name="report_card_ids">
+                  <tree string="Calificaciones" editable="bottom">
+                      <field name="clase_id" options="{'no_create': True}" readonly="1"/>
+					  <field name="nota_parcial1" />
+					  <field name="nivelacion_1"/>
+					  <field name="nota_parcial2" />
+					  <field name="nivelacion_2"/>
+					  <field name="nota_parcial3" />
+					  <field name="nivelacion_3"/>
+					  <field name="nota_parcial4" />
+					  <field name="nivelacion_4"/>
+                  </tree>
+              </field>
+          </page>
+        </notebook>
+      </sheet>
+		<div class="oe_chatter">
+            <field name="message_ids" widget="mail_thread"/>
+    	</div>   
+      </form>
+    </field>
+   </record> 
+
+  <!-- Vista Tree de Curso-->
+<record model="ir.ui.view" id="school_report_card_tree_base_view">
+   <field name="name">school.report.card.tree</field>
+   <field name="model">school.report.card</field>
+   <field name="arch" type="xml">
+       <tree string="List">
+			<field name="student_id"/>
+			<field name="grade_id"/>
+			<field name="section_id"/>
+			<field name="parcial"/>
+			<field name="descripcion"/>
+       </tree>
+   </field>    
+</record>
+
+	<!--  Accion para Notas primaria -->
+   <record model="ir.actions.act_window" id="school_report_card_action">
+   <field name="name">Calificaciones de Alumno</field>
+   <field name="res_model">school.report.card</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+   <field name="help" type="html">
+   		<p class="oe_view_nocontent_create">Crear primera calificación</p>
+   </field>
+   </record>
+   <!-- Menu Principal de Gestion de cuotas -->
+<menuitem action="school_report_card_action" id="school_report_card_menu" string="Notas de alumnos" name="Notas de alumnos" parent="school_menu_student" sequence="40"/>
+
+   </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

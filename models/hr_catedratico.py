@@ -8,3 +8,4 @@ class Catedratico(models.Model):
 
     es_catadratico = fields.Boolean("Es catedrático")
     maestro_guia = fields.Boolean("Maestro Guia")
+    maestro_especial = fields.Boolean("Maestro Especial")

@@ -26,6 +26,7 @@
 	"views/section_view.xml",
 	#"views/school_menus.xml",	
 	"views/notas_view.xml",
+	"views/report_card_view.xml",
     ],
     #'update_xml' : [
      #       'security/groups.xml',

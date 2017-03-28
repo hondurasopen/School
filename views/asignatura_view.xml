@@ -95,7 +95,7 @@
 
 <menuitem action="school_asignatura_action_pre" string="Asignaturas Pre-Básica" id="school_action_asignatura1" name="Asignaturas Pre-Básica" parent="school_asignatura_main" sequence="10"/>
 
-<menuitem action="school_asignatura_action_basica" string="Asignaturas Primaria" id="school_action_asignatura2" name="Asignaturas Primaria" parent="school_asignatura_main" sequence="20"/>
+<menuitem action="school_asignatura_action_basica" string="Asignaturas Básica" id="school_action_asignatura2" name="Asignaturas Primaria" parent="school_asignatura_main" sequence="20"/>
 
 <menuitem action="school_asignatura_action_high" string="Asignaturas Media" id="school_asignatura_media" name="Asignaturas Media" parent="school_asignatura_main" sequence="30"/>
 

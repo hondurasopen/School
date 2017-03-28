@@ -8,22 +8,24 @@ import calendar
 class Sections(models.Model):
     _name = "school.sections"
 
-    name = fields.Char("Seccion", required=True)
+    name = fields.Char("Sección", required=True)
     course_id = fields.Many2one("school.course", "Curso", required=True)
     start_date = fields.Date("Fecha de inicio", required=True)
     end_date = fields.Date("Fecha final", required=True)
     prebasica = fields.Boolean("Pre Básica", default=False)
-    maestro_guia = fields.Many2one("hr.employee", "Maestro Guia" , domain=[('maestro_guia', '=', True)])
+    maestro_guia = fields.Many2one("hr.employee", "Maestro Guia" , domain="[('maestro_guia', '=', True)]")
     description = fields.Text("Description and notes")
     state = fields.Selection([('draft', 'Borrador'), ('progress', 'En progreso'), ('cancel', 'Cancelada'), ('done', 'Finalizada')], string='Estado', default='draft')
     description = fields.Text("Observaciones generales")
     section_line = fields.One2many("school.sections.line", "section_id", "Asignaturas y maestro")
     alumnos_ids = fields.One2many("res.partner", "section_id", "Alumnos")
 
+
     _defaults = {'start_date': fields.Date.today()}
 
     @api.multi
     def action_section_progress(self):
+
         self.write({'state': 'progress'})
 
     @api.multi

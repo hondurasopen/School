@@ -4,7 +4,7 @@ from openerp import models, fields, api
 
 class Course(models.Model):
     _name = "school.course"
-    _inherit = ['mail.thread']
+
 
     name = fields.Char("Nombre del grado", required=True)
     description = fields.Text("Descripción del grado")
@@ -12,14 +12,13 @@ class Course(models.Model):
     nivel = fields.Selection([('prebasica', 'Pre-Básica'), ('basica', 'Básica'), ('media', 'Media')], required=True)
     section_ids = fields.One2many("school.sections", "course_id", "Secciones")
     curso_line = fields.One2many("school.course.line", "curso_id", "Detalles del grado")
-    home_teacher = fields.Boolean("Maestro Guia")
+
 
 
 class CursoLine(models.Model):
     _name = "school.course.line"
 
     curso_id = fields.Many2one("school.course", "Section")
-    # maestro_id = fields.Many2one("hr.employee", "Catedratico")
     asignatura_id = fields.Many2one("school.asignatura", "Asignatura", required=True)
     name = fields.Char("Descripción")
 

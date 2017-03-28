@@ -43,10 +43,7 @@
             <field name="description"/>
         </page>
         </notebook>
-      </sheet>
-		<div class="oe_chatter">
-            <field name="message_ids" widget="mail_thread"/>
-    	</div>   
+      </sheet>  
       </form>
     </field>
    </record>  
