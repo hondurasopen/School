@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <report
+        id="report_card_print"
+        model="school.report.card"
+        string="Report Card"
+        name="england_school.report_card_print_view"
+        file="england_school.report_card_print"
+        report_type="qweb-pdf" />
+</data>
+</openerp>
+

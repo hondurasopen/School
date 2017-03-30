@@ -20,12 +20,10 @@ class Sections(models.Model):
     section_line = fields.One2many("school.sections.line", "section_id", "Asignaturas y maestro")
     alumnos_ids = fields.One2many("res.partner", "section_id", "Alumnos")
 
-
     _defaults = {'start_date': fields.Date.today()}
 
     @api.multi
     def action_section_progress(self):
-
         self.write({'state': 'progress'})
 
     @api.multi
@@ -60,7 +58,7 @@ class Sections(models.Model):
                 'asignatura_id': line.asignatura_id.id,
                 'name': line.name,
             }
-            if line.asignatura_id.home_teacher and self.maestro_guia:
+            if line.asignatura_id.home_teacher or line.asignatura_id.area_asignatura == 'sociabilidad':
                 values["maestro_id"] = self.maestro_guia.id
 
             id_section = obj_line.create(values)

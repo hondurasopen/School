@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_card_print_view_document">
+<!--<t t-call="report.external_layout">-->
+<t t-foreach="docs" t-as="o">
+ <div class="header">
+		<p><h2 class="text-center" style="font-weight:bold;">
+		ENGLAND SCHOOL
+		<br/>
+		REPORT CARD 2016-2017
+		</h2>
+		</p>
+</div>
+  <div class="page">  
+ <hr />
+	<p><h4 class="text-center" style="font-weight:bold;">
+		ENGLAND SCHOOL
+		<br/>
+		REPORT CARD 2016-2017
+		</h4>
+		</p>
+ <hr />
+
+ <table style="font-size:16px;width:100%; height:100px;">
+        <tr>
+		<td style="width:70%;"><strong> Name: </strong> <span t-field="o.student_id"/></td> 
+		<td style="width:30%;"><strong>Teacher: </strong></td>
+		</tr>
+        <tr><td style="width:40%;"><strong>Grade: </strong><span t-field="o.grade_id"/></td> 
+        <td style="width:40%;"><strong>Section: </strong><span t-field="o.section_id"/>   
+        </td></tr>
+        
+ </table>
+ <hr />
+
+<table style="border:1px solid black;font-size:14px;width:100%; height:100px;">
+<thead style="background:gray;font-color:white;">
+        <tr style="font-size:12px;">
+            <!--<th>Item</th>-->
+            <th class="text-center" style="width:30%;border:1px solid black;">Clases/Classes</th>
+			<th class="text-center" style="width:8%;border:1px solid black;">Nota I Parcial </th>              
+			<th class="text-center" style="width:8%;border:1px solid black;">Nivelación</th>   
+			<th class="text-center" style="width:8%;border:1px solid black;">Nota II Parcial </th>              
+			<th class="text-center" style="width:8%;border:1px solid black;">Nivelación</th>
+				<th class="text-center" style="width:8%;border:1px solid black;">Nota III Parcial </th>              
+			<th class="text-center" style="width:8%;border:1px solid black;">Nivelación</th>
+				<th class="text-center" style="width:8%;border:1px solid black;">Nota IV Parcial </th>              
+			<th class="text-center" style="width:8%;border:1px solid black;">Nivelación</th>        
+        </tr>
+      </thead>
+<tbody class="invoice_tbody" style="font-size:12px;">
+		<tr t-foreach="o.report_card_ids" t-as="l">
+		<!--<td></td>-->
+			<td class="text-center" style="width:40%;;border:1px solid black;">
+			<span t-field="l.clase_id"/>
+			</td>
+			<td class="text-center" style="width:6%;;border:1px solid black;">
+			<span t-field="l.nota_parcial1" />
+			</td>
+			<td class="text-center" style="width:6%;;border:1px solid black;">
+			<span t-field="l.nivelacion_1" />
+			</td>
+			<td class="text-center" style="width:6%;;border:1px solid black;">
+			<span t-field="l.nota_parcial2"/>
+			</td>
+			<td class="text-center" style="width:6%;;border:1px solid black;">
+			<span t-field="l.nivelacion_2" />
+			</td>
+			<td style="width:6%;border:1px solid black;" class="text-center">
+			<span t-field="l.nota_parcial3"/>
+			</td>
+			<td style="width:6%;border:1px solid black;" class="text-center">
+			<span t-field="l.nivelacion_3" />
+			</td>
+			<td style="width:6%;border:1px solid black;" class="text-center">
+			<span t-field="l.nota_parcial4"/>
+			</td>
+			<td style="width:6%;border:1px solid black;" class="text-center">
+			<span t-field="l.nivelacion_4" />
+			</td>
+		</tr>
+    </tbody>
+</table>
+ <hr />
+<p><strong>PROMEDIOS POR PARCIAL</strong>
+</p>
+ <table style="font-size:16px;width:100%; height:100px;">
+        <tr>
+		<td style="width:70%;"><strong>I PARCIAL: </strong> <span t-field="o.promedio_parcial1"/></td> 
+		<td style="width:30%;"><strong>II PARCIAL: </strong>  <span t-field="o.promedio_parcial2"/></td>
+		</tr>
+        <tr><td style="width:40%;"><strong>III PARCIAL: </strong><span t-field="o.promedio_parcial3"/></td> 
+        <td style="width:40%;"><strong>IV PARCIAL: </strong><span t-field="o.promedio_parcial4"/>   
+        </td></tr>
+        
+ </table>
+ <hr />
+
+<p><strong> Sociabilidad y Comportamiento</strong></p>
+<br/>
+<table class="table table-condensed" style="border:1px solid black;font-size:14px;width:100%; height:100px;">
+	<thead style="background:gray;font-color:white;">
+        <tr style="font-size:12px;">
+            <!--<th>Item</th>-->
+            <th class="text-center" style="width:40%;border:1px solid black;">Sociabilidad y Comportamiento</th>
+			<th class="text-center" style="width:10%;border:1px solid black;">I PARCIAL</th>              
+			<th class="text-center" style="width:10%;border:1px solid black;">II PARCIAL</th>   
+			<th class="text-center" style="width:10%;border:1px solid black;">III PARCIAL</th>   
+			<th class="text-center" style="width:10%;border:1px solid black;">IV PARCIAL</th>     
+        </tr>
+      </thead>
+<tbody class="invoice_tbody" style="font-size:12px;">
+		<tr t-foreach="o.comportamiento_ids" t-as="l">
+		<!--<td></td>-->
+			<td class="text-center" style="width:40%;;border:1px solid black;">
+			<span t-field="l.comportamiento_id"/>
+			</td>
+			<td class="text-center" style="width:10%;;border:1px solid black;">
+			<span t-field="l.partipacion_1" />
+		
+			</td>
+			<td class="text-center" style="width:10%;;border:1px solid black;">
+			<span t-field="l.partipacion_2"/>
+			
+			</td>
+			<td style="width:10%;border:1px solid black;" class="text-center">
+			<span t-field="l.partipacion_3"/>
+			
+			</td>
+			<td style="width:10%;border:1px solid black;" class="text-center">
+			<span t-field="l.partipacion_4"/>
+			
+			</td>
+		</tr>
+    </tbody>
+</table>
+ <hr />
+<p><strong>I PARCIAL COMENTARIOS</strong>
+</p>
+<p> <span t-field="o.comentarios_1"/></p>
+ <hr />
+<p><strong>II PARCIAL COMENTARIOS</strong>
+</p>
+<p><span t-field="o.comentarios_2"/> </p>
+ <hr />
+<p><strong>III PARCIAL COMENTARIOS</strong>
+</p>
+<p><span t-field="o.comentarios_3"/> </p>
+<hr />
+<p><strong>IV PARCIAL COMENTARIOS</strong>
+</p>
+<p><span t-field="o.comentarios_4"/> </p>
+
+</div>
+</t>
+<!--</t>-->
+</template>
+
+<template id="report_card_print_view">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+			<t t-call="england_school.report_card_print_view_document"/>
+            </t>
+        </t>
+</template>
+</data>
+</openerp>

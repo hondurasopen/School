@@ -100,6 +100,22 @@
 <menuitem action="school_asignatura_action_high" string="Asignaturas Media" id="school_asignatura_media" name="Asignaturas Media" parent="school_asignatura_main" sequence="30"/>
 
 
+<!--  Accion para Sections -->
+   <record model="ir.actions.act_window" id="school_asignatura_action_comportamiento">
+   <field name="name">Asignaturas</field>
+   <field name="res_model">school.asignatura.comportamiento</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear sociabilidad y comportamiento</p>
+   </field>
+   </record>
+
+
+
+
+<menuitem action="school_asignatura_action_comportamiento" string="Sociabilidad y Comportamiento" id="school_asignatura_comportamiento" name="Sociabilidad y Comportamiento" parent="school_asignatura_main" sequence="60"/>
+
 
    </data>
 </odoo>

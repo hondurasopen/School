@@ -27,7 +27,7 @@
 	<group cols="2"> 
 			<field name="course_id" options="{'no_create': True}"/>
 			<field name="prebasica" invisible="1"/>
-			<field name="maestro_guia" attrs="{'invisible': [('prebasica','=',False)], 'required': [('prebasica','=',True)]}"/>
+			<field name="maestro_guia" required="1"/><!--attrs="{'required': [('prebasica','=',True)]}"/>-->
 			<button name="asignar_clases" class="oe_highlight" string="Asignar clases" type="object" attrs="{'invisible': ['|',('state','in',['progress','done']) ]}"/>
 	</group>
 	</group>		

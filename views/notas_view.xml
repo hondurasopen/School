@@ -19,13 +19,13 @@
         <group cols="2"> 
             <field name="maestro_id"/>
 			<field name="prebasica_nota" invisible="1"/>
-			<field name="nivel_section" readonly="True"/>
+			<field name="nivel_escolar" readonly="1"/>
         </group>
 		 <group cols="2"> 
             <field name="seccion_id" domain="[('maestro_guia','=',maestro_id)]" attrs="{'invisible': [('prebasica_nota','=',False)], 'required': [('prebasica_nota','=',True)]}" options="{'no_create': True}"/>
 			<field name="section_media_id"  attrs="{'invisible': [('prebasica_nota','=',True)], 'required': [('prebasica_nota','=',False)]}"/>
 			<field name="alumno_id" attrs="{'invisible': [('prebasica_nota','=',False)], 'required': [('prebasica_nota','=',True)]}" domain="[('section_id','=',seccion_id)]" options="{'no_create': True}"/>
-		<button name="registrar_notas" class="oe_highlight" string="Registrar" type="object" attrs="{'invisible': ['|',('state','in',['progress','done']) ]}"/>
+		<button name="registrar_notas" class="oe_highlight" string="Registrar Evaluaciones" type="object" attrs="{'invisible': ['|',('state','in',['progress','done']) ]}"/>
         </group>
       </group>
       <notebook>
@@ -45,6 +45,22 @@
                   </tree>
               </field>
           </page>
+		<page string="Sociabilidad y Comportamiento" attrs="{'invisible': [('prebasica_nota','=',False)]}">
+			<field name="comportamiento_ids">
+                  <tree string="Sociabilidad y Comportamiento" editable="bottom">
+                      <field name="comportamiento_id" options="{'no_create': True}" readonly="1"/>
+                      <field name="alumno_id" options="{'no_create': True}" readonly="1"/>
+					  <field name="partipacion_1" />
+					  <field name="partipacion_2"/>
+					  <field name="partipacion_3" />
+					<field name="partipacion_4"/>
+                  </tree>
+             </field>
+		</page>
+		<page string="Comentarios Generales" attrs="{'invisible': [('prebasica_nota','=',False)]}">
+		<separator string="Comentarios I parcial"/>
+			<field name="comentarios_1" placeholder="Comentarios generales I parcial para el alumno"/>
+		</page>
         </notebook>
       </sheet>
 		<div class="oe_chatter">
@@ -62,10 +78,9 @@
        <tree string="List">
 	      <field name="maestro_id"/>
 		<field name="prebasica_nota" invisible="1"/>
-		<field name="nivel_section"/>
+		<field name="nivel_escolar"/>
 		<field name="alumno_id" />
 		<field name="seccion_id"/>
-		<field name="descripcion"/>
        </tree>
    </field>    
 </record>
@@ -78,11 +93,10 @@
        <tree string="List">
 	      <field name="maestro_id"/>
 		<field name="prebasica_nota" invisible="1"/>
-		<field name="nivel_section"/>
+		<field name="nivel_escolar"/>
 		<field name="alumno_id" attrs="{'invisible': [('prebasica_nota','=',False)]}"/>
 		<field name="section_media_id" />
 		<field name="seccion_id"/>
-		<field name="descripcion"/>
        </tree>
    </field>    
 </record>
@@ -95,9 +109,8 @@
        <tree string="List">
 	      <field name="maestro_id"/>
 		<field name="prebasica_nota" invisible="1"/>
-		<field name="nivel_section"/>
+		<field name="nivel_escolar"/>
 		<field name="section_media_id"/>
-		<field name="descripcion"/>
        </tree>
    </field>    
 </record>
@@ -110,9 +123,8 @@
        <tree string="List">
 	      <field name="maestro_id"/>
 		<field name="prebasica_nota" invisible="1"/>
-		<field name="nivel_section"/>
+		<field name="nivel_escolar"/>
 		<field name="section_media_id" />
-		<field name="descripcion"/>
        </tree>
    </field>    
 </record>
@@ -136,9 +148,9 @@
    <field name="res_model">school.notas</field>
    <field name="view_type">form</field>
    <field name="view_model">tree,form</field>
-	<field name="domain">[('nivel_section','=','media')]</field>
+	<field name="domain">[('nivel_escolar','=','media')]</field>
 	 <field name="view_id" ref="school_tree_media_notas"/>
-	<!--<field name="context">{'default_nivel_section': 'media'}</field>-->
+	<field name="context">{'default_nivel_escolar':'media'}</field>
    <field name="help" type="html">
    		<p class="oe_view_nocontent_create">Crear el primer calificación</p>
    </field>
@@ -149,9 +161,9 @@
    <field name="res_model">school.notas</field>
    <field name="view_type">form</field>
    <field name="view_model">tree,form</field>
-	<field name="domain">[('nivel_section','=','basica')]</field>
+	<field name="domain">[('nivel_escolar','=','basica')]</field>
 	 <field name="view_id" ref="school_notas_tree_base_view"/>
-	<field name="context">{'default_nivel_section':'basica'}</field>
+	<field name="context">{'default_nivel_escolar':'basica', 'default_prebasica_nota':1}</field>
    <field name="help" type="html">
    		<p class="oe_view_nocontent_create">Crear el primer calificación</p>
    </field>
@@ -162,9 +174,9 @@
    <field name="res_model">school.notas</field>
    <field name="view_type">form</field>
    <field name="view_model">tree,form</field>
-	<field name="domain">[('nivel_section','=','prebasica')]</field>
+	<field name="domain">[('nivel_escolar','=','prebasica')]</field>
 	 <field name="view_id" ref="school_notas_tree_base_view"/>
-	<field name="context">{'default_nivel_section':'prebasica'}</field>
+	<field name="context">{'default_nivel_escolar':'prebasica', 'default_prebasica_nota':1}</field>
    <field name="help" type="html">
    		<p class="oe_view_nocontent_create">Crear el primer calificación</p>
    </field>
@@ -180,20 +192,4 @@
 
    </data>
 </odoo>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

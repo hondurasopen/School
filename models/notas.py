@@ -7,8 +7,13 @@ class NotasAlumno(models.Model):
     _name = "school.notas"
     _inherit = ['mail.thread']
 
-    descripcion = fields.Text("Notas generales")
-    seccion_id = fields.Many2one("school.sections", "Sección")
+
+    nivel_escolar = fields.Selection([('prebasica', 'Pre-Básica'), ('basica', 'Básica'), ('media', 'Media')], required=True)
+    comentarios_1 = fields.Text("Notas generales")
+    comentarios_2 = fields.Text("Notas generales")
+    comentarios_3 = fields.Text("Notas generales")
+    comentarios_4 = fields.Text("Notas generales")
+    seccion_id = fields.Many2one("school.sections", "Sección Primaria/Pre-básica")
     section_media_id = fields.Many2one("school.sections", "Sección")
     maestro_id = fields.Many2one("hr.employee", "Maestro", required=True, domain="[('es_catadratico', '=', True)]")
     nota_line_ids = fields.One2many("school.notas.line", "nota_id", "Calificación de alumnos")
@@ -16,28 +21,31 @@ class NotasAlumno(models.Model):
         string='Estado', default='draft')
     alumno_id = fields.Many2one("res.partner", "Alumno", domain="[('es_estudiante', '=', True)]")
     prebasica_nota = fields.Boolean("Pre Básica", default=False)
-    nivel_section = fields.Selection([('prebasica', 'Pre-Básica'), ('basica', 'Básica'), ('media', 'Media')], required=True)
+    comportamiento_ids = fields.One2many("school.notas.line.comportamiento","nota_id","Sociabilidad y Comportamiento")
 
     @api.onchange("seccion_id")
     def onchangesecction(self):
-        if self.seccion_id.prebasica:
-            self.prebasica_nota = True
-            self.nivel_section = self.seccion_id.course_id.nivel
-        else:
-            self.prebasica_nota = False
-            self.nivel_section = self.seccion_id.course_id.nivel
+        if self.seccion_id:
+            if self.seccion_id.prebasica:
+                self.prebasica_nota = True
+                self.nivel_escolar = self.seccion_id.course_id.nivel
+            else:
+                self.prebasica_nota = False
+                self.nivel_escolar = self.seccion_id.course_id.nivel
 
     @api.onchange("section_media_id")
     def onchangesecctionmedia(self):
-        self.prebasica_nota = False
-        self.nivel_section = self.section_media_id.course_id.nivel
+        if self.section_media_id:
+            self.prebasica_nota = False
+            self.nivel_escolar = self.section_media_id.course_id.nivel
 
     @api.onchange("maestro_id")
     def onchangemaestro(self):
-        if self.maestro_id.maestro_guia:
-            self.prebasica_nota = True
-        else:
-            self.prebasica_nota = False
+        if self.maestro_id:
+            if self.maestro_id.maestro_guia:
+                self.prebasica_nota = True
+            else:
+                self.prebasica_nota = False
 
     @api.multi
     def action_nota_draft(self):
@@ -57,6 +65,7 @@ class NotasAlumno(models.Model):
         obj_unlink = obj_line.search([('nota_id', '=', self.id)])
         obj_partner = False
         obj_section_line = False
+        id_line_notas = False
         if self.nota_line_ids:
             for delete in obj_unlink:
                 delete.unlink()
@@ -101,7 +110,24 @@ class NotasAlumno(models.Model):
                     values["section_id"] = self.seccion_id.id
                 if self.section_media_id:
                     values["section_id"] = self.section_media_id.id
-                id_section = obj_line.create(values)
+                id_line_notas = obj_line.create(values)
+
+        if id_line_notas and self.prebasica_nota:
+            obj_line = self.env["school.notas.line.comportamiento"]
+            obj_comportamiento = self.env["school.asignatura.comportamiento"].search([('id', '!=', 0)])
+            obj_unlink = obj_line.search([('nota_id', '=', self.id)])
+            if self.comportamiento_ids:
+                for delete in obj_unlink:
+                    delete.unlink()
+
+            for comportamiento in obj_comportamiento:
+                valores = {
+                    'comportamiento_id': comportamiento.id,
+                    'alumno_id': self.alumno_id.id,
+                    'section_id': self.seccion_id.id,
+                    'nota_id': self.id,
+                }
+                id_com = obj_line.create(valores)
 
 
 class NotasAlumnoline(models.Model):
@@ -119,4 +145,16 @@ class NotasAlumnoline(models.Model):
     nivelacion_3 = fields.Float("Nota Nivelación")
     nota_parcial4 = fields.Float("Nota Parcial 4")
     nivelacion_4 = fields.Float("Nota Nivelación")
-    partipacion = fields.Selection([('E', 'Excelente'), ('MB', 'Muy Bueno'), ('S', 'Satisfactoria'), ('NS', 'No Satisfactoria')], string='Participación')
+
+class NotasComportamiento(models.Model):
+    _name = "school.notas.line.comportamiento"
+
+    nota_id = fields.Many2one("school.nota", "Nota Id")
+    report_card_id = fields.Many2one("school.report.card", "Report Card")
+    section_id = fields.Many2one("school.sections", "Sección Id")
+    alumno_id = fields.Many2one("res.partner", "Alumno", domain=[('es_estudiante', '=', True)])
+    comportamiento_id = fields.Many2one("school.asignatura.comportamiento", "Sociabilidad y Comportamiento")
+    partipacion_4 = fields.Selection([('E', 'Excelente'), ('MB', 'Muy Bueno'), ('S', 'Satisfactoria'), ('NS', 'No Satisfactoria')], string='Participación IV Parcial')
+    partipacion_3 = fields.Selection([('E', 'Excelente'), ('MB', 'Muy Bueno'), ('S', 'Satisfactoria'), ('NS', 'No Satisfactoria')], string='Participación III Parcial')
+    partipacion_2 = fields.Selection([('E', 'Excelente'), ('MB', 'Muy Bueno'), ('S', 'Satisfactoria'), ('NS', 'No Satisfactoria')], string='Participación II Parcial')
+    partipacion_1 = fields.Selection([('E', 'Excelente'), ('MB', 'Muy Bueno'), ('S', 'Satisfactoria'), ('NS', 'No Satisfactoria')], string='Participación I Parcial')

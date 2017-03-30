@@ -22,3 +22,8 @@ class SectionsAsignturas(models.Model):
     catedratico_id = fields.Many2one("hr.employee", "Maestros", domain=[('es_catadratico', '=', True)])
     name = fields.Char("Descripción")
 
+
+class Comportamiento(models.Model):
+    _name = "school.asignatura.comportamiento"
+
+    name = fields.Char("Sociabilidad y Comportamiento")

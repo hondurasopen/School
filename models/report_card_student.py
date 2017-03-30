@@ -13,11 +13,15 @@ class Reportcard(models.Model):
     parcial = fields.Selection([('primer', 'Primer Parcial'), ('segundo', 'Segundo Parcial'), ('tercer', 'Tercer Parcial'), ('Cuarto', 'Cuarto Parcial')], 
         string='Parcial')
     report_card_ids = fields.One2many("school.report.card.line", "report_card_id", "Detalle de calificaciones")
-    descripcion = fields.Text("Observaciones generales")
     promedio_parcial1 = fields.Float("Promedio Parcial 1")
     promedio_parcial2 = fields.Float("Promedio Parcial 2")
     promedio_parcial3 = fields.Float("Promedio Parcial 3")
     promedio_parcial4 = fields.Float("Promedio Parcial 4")
+    comentarios_1 = fields.Text("Comentarios primer parcial")
+    comentarios_2 = fields.Text("Comentarios segundo parcial")
+    comentarios_3 = fields.Text("Comentarios tercer parcial")
+    comentarios_4 = fields.Text("Comentarios cuarto parcial")
+    comportamiento_ids = fields.One2many("school.notas.line.comportamiento", "report_card_id", "Sociabilidad y Comportamiento")
 
     @api.onchange("student_id")
     def onchangeestudiante(self):
@@ -64,6 +68,7 @@ class Reportcard(models.Model):
                 self.promedio_parcial1 = nota_parcial / num_clases
 
     def generar_notas(self):
+        obj_line_comportamiento = self.env["school.notas.line.comportamiento"]
         obj_line_notas = self.env["school.notas.line"].search([('alumno_id', '=', self.student_id.id), ('section_id', '=', self.section_id.id)])
         obj_line_report_line_id = self.env["school.report.card.line"]
         obj_unlink = obj_line_report_line_id.search([('report_card_id', '=', self.id)])
@@ -94,7 +99,12 @@ class Reportcard(models.Model):
                     values["nota_parcial4"] = line.nota_parcial4
                     values["nivelacion_4"] = line.nivelacion_4
             id_section = obj_line_report_line_id.create(values)
-        if id_section:
+
+        if id_section and self.section_id.prebasica:
+            comp_ids = obj_line_comportamiento.search([('section_id', '=', self.section_id.id), ('alumno_id', '=', self.student_id.id)])
+            if comp_ids:
+                for obj_ids in comp_ids:
+                    obj_ids.write({'report_card_id': self.id})
             self.generarpromedios()
 
 
