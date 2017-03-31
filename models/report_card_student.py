@@ -116,11 +116,14 @@ class Reportcardline(models.Model):
     clase_id = fields.Many2one("school.asignatura", "Asignatura", required=True)
     nota_parcial1 = fields.Float("Nota Parcial 1")
     nivelacion_1 = fields.Float("Nota Nivelación")
+    total_1 = fields.Float("Total")
     nota_parcial2 = fields.Float("Nota Parcial 2")
     nivelacion_2 = fields.Float("Nota Nivelación")
+    total_2 = fields.Float("Total")
     nota_parcial3 = fields.Float("Nota Parcial 3")
     nivelacion_3 = fields.Float("Nota Nivelación")
+    total_3 = fields.Float("Total")
     nota_parcial4 = fields.Float("Nota Parcial 4")
     nivelacion_4 = fields.Float("Nota Nivelación")
-
+    total_4 = fields.Float("Total")
 

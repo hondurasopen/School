@@ -38,21 +38,25 @@
 <thead style="background:gray;font-color:white;">
         <tr style="font-size:12px;">
             <!--<th>Item</th>-->
-            <th class="text-center" style="width:30%;border:1px solid black;">Clases/Classes</th>
-			<th class="text-center" style="width:8%;border:1px solid black;">Nota I Parcial </th>              
-			<th class="text-center" style="width:8%;border:1px solid black;">Nivelación</th>   
-			<th class="text-center" style="width:8%;border:1px solid black;">Nota II Parcial </th>              
-			<th class="text-center" style="width:8%;border:1px solid black;">Nivelación</th>
-				<th class="text-center" style="width:8%;border:1px solid black;">Nota III Parcial </th>              
-			<th class="text-center" style="width:8%;border:1px solid black;">Nivelación</th>
-				<th class="text-center" style="width:8%;border:1px solid black;">Nota IV Parcial </th>              
-			<th class="text-center" style="width:8%;border:1px solid black;">Nivelación</th>        
+            <th class="text-center" style="width:16%;border:1px solid black;">Clases/Classes</th>
+			<th class="text-center" style="width:7%;border:1px solid black;">Nota I Parcial </th>              
+			<th class="text-center" style="width:7%;border:1px solid black;">Nivelación</th>
+			<th class="text-center" style="width:7%;border:1px solid black;">Total</th>   
+			<th class="text-center" style="width:7%;border:1px solid black;">Nota II Parcial </th>              
+			<th class="text-center" style="width:7%;border:1px solid black;">Nivelación</th>
+			<th class="text-center" style="width:7%;border:1px solid black;">Total</th>  
+			<th class="text-center" style="width:7%;border:1px solid black;">Nota III Parcial </th>              
+			<th class="text-center" style="width:7%;border:1px solid black;">Nivelación</th>
+			<th class="text-center" style="width:7%;border:1px solid black;">Total</th>  
+			<th class="text-center" style="width:7%;border:1px solid black;">Nota IV Parcial </th>              
+			<th class="text-center" style="width:7%;border:1px solid black;">Nivelación</th>
+			<th class="text-center" style="width:7%;border:1px solid black;">Total</th>  
         </tr>
       </thead>
 <tbody class="invoice_tbody" style="font-size:12px;">
 		<tr t-foreach="o.report_card_ids" t-as="l">
 		<!--<td></td>-->
-			<td class="text-center" style="width:40%;;border:1px solid black;">
+			<td class="text-center" style="width:16%;;border:1px solid black;">
 			<span t-field="l.clase_id"/>
 			</td>
 			<td class="text-center" style="width:6%;;border:1px solid black;">
@@ -62,22 +66,37 @@
 			<span t-field="l.nivelacion_1" />
 			</td>
 			<td class="text-center" style="width:6%;;border:1px solid black;">
+			<span t-field="l.total_1" />
+			</td>
+			<!-- Nota de parccial 2-->
+			<td class="text-center" style="width:6%;;border:1px solid black;">
 			<span t-field="l.nota_parcial2"/>
 			</td>
 			<td class="text-center" style="width:6%;;border:1px solid black;">
 			<span t-field="l.nivelacion_2" />
 			</td>
+			<td class="text-center" style="width:6%;;border:1px solid black;">
+			<span t-field="l.total_2" />
+			</td>
+			<!-- Nota de parccial 3-->
 			<td style="width:6%;border:1px solid black;" class="text-center">
 			<span t-field="l.nota_parcial3"/>
 			</td>
 			<td style="width:6%;border:1px solid black;" class="text-center">
 			<span t-field="l.nivelacion_3" />
 			</td>
+			<td class="text-center" style="width:6%;;border:1px solid black;">
+			<span t-field="l.total_3" />
+			</td>
+			<!-- Nota de parccial 4-->
 			<td style="width:6%;border:1px solid black;" class="text-center">
 			<span t-field="l.nota_parcial4"/>
 			</td>
 			<td style="width:6%;border:1px solid black;" class="text-center">
 			<span t-field="l.nivelacion_4" />
+			</td>
+			<td class="text-center" style="width:6%;;border:1px solid black;">
+			<span t-field="l.total_4" />
 			</td>
 		</tr>
     </tbody>
