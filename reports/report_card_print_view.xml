@@ -26,8 +26,8 @@
 					REPORT CARD 2016-2017
 					</strong></h4>
              </td>
-			<td style="width:35%;font-weight:bold;">
-					
+			<td style="width:35%;font-weight:bold;" class="text-right">
+				<img t-if="user.company_id.logo" t-att-src="'data:image/png;base64,%s' % user.company_id.logo" style="height:100px;"/>
              </td>
             </tr>
           </table>
