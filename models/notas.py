@@ -7,21 +7,35 @@ class NotasAlumno(models.Model):
     _name = "school.notas"
     _inherit = ['mail.thread']
 
+    @api.model
+    def getmaestro(self):
+        obj_maestro = self.env["hr.employee"].search([('user_id', '=', self.env.user.id)])
+        if obj_maestro:
+            return obj_maestro
 
-    nivel_escolar = fields.Selection([('prebasica', 'Pre-Básica'), ('basica', 'Básica'), ('media', 'Media')], required=True)
+    nivel_escolar = fields.Selection([('prebasica', 'Pre-Básica'), ('basica', 'Básica'), ('media', 'Media')])
     comentarios_1 = fields.Text("Notas generales")
     comentarios_2 = fields.Text("Notas generales")
     comentarios_3 = fields.Text("Notas generales")
     comentarios_4 = fields.Text("Notas generales")
     seccion_id = fields.Many2one("school.sections", "Sección Primaria/Pre-básica")
     section_media_id = fields.Many2one("school.sections", "Sección")
-    maestro_id = fields.Many2one("hr.employee", "Maestro", required=True, domain="[('es_catadratico', '=', True)]")
+    maestro_id = fields.Many2one("hr.employee", "Maestro", required=True, domain="[('es_catadratico', '=', True)]", default= getmaestro)
     nota_line_ids = fields.One2many("school.notas.line", "nota_id", "Calificación de alumnos")
     state = fields.Selection([('draft', 'Borrador'), ('progress', 'En evaluación'), ('done', 'Finalizado')], 
         string='Estado', default='draft')
     alumno_id = fields.Many2one("res.partner", "Alumno", domain="[('es_estudiante', '=', True)]")
     prebasica_nota = fields.Boolean("Pre Básica", default=False)
     comportamiento_ids = fields.One2many("school.notas.line.comportamiento","nota_id","Sociabilidad y Comportamiento")
+    maestro_guia = fields.Boolean("Es maestro guia")
+    inasistencias_1 = fields.Integer("Inasistencia I Parcial")
+    inasistencias_2 = fields.Integer("Inasistencia II Parcial")
+    inasistencias_3 = fields.Integer("Inasistencia III Parcial")
+    inasistencias_4 = fields.Integer("Inasistencia IV Parcial")
+    llegadas_1 = fields.Integer("Llegadas Tarde I Parcial")
+    llegadas_2 = fields.Integer("Llegadas Tarde II Parcial")
+    llegadas_3 = fields.Integer("Llegadas Tarde III Parcial")
+    llegadas_4 = fields.Integer("Llegadas Tarde IV Parcial")
 
     @api.onchange("seccion_id")
     def onchangesecction(self):
@@ -29,6 +43,9 @@ class NotasAlumno(models.Model):
             if self.seccion_id.prebasica:
                 self.prebasica_nota = True
                 self.nivel_escolar = self.seccion_id.course_id.nivel
+                if self.seccion_id.maestro_guia.id == self.maestro_id.id:
+                    self.maestro_guia = True
+
             else:
                 self.prebasica_nota = False
                 self.nivel_escolar = self.seccion_id.course_id.nivel
@@ -44,8 +61,10 @@ class NotasAlumno(models.Model):
         if self.maestro_id:
             if self.maestro_id.maestro_guia:
                 self.prebasica_nota = True
+                self.maestro_guia = True
             else:
                 self.prebasica_nota = False
+                self.maestro_guia = False
 
     @api.multi
     def action_nota_draft(self):

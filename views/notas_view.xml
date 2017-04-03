@@ -17,9 +17,10 @@
       <separator string="Registro de notas"/>
       <group colspan="4">
         <group cols="2"> 
-            <field name="maestro_id"/>
+            <field name="maestro_id" options="{'no_create': True}"/>
 			<field name="prebasica_nota" invisible="1"/>
 			<field name="nivel_escolar" readonly="1"/>
+			<field name="maestro_guia" invisible="1"/>
         </group>
 		 <group cols="2"> 
             <field name="seccion_id" domain="[('maestro_guia','=',maestro_id)]" attrs="{'invisible': [('prebasica_nota','=',False)], 'required': [('prebasica_nota','=',True)]}" options="{'no_create': True}"/>
@@ -32,20 +33,20 @@
           <page string="Calificaciones de alumnos">
               <field name="nota_line_ids">
                   <tree string="Calificaciones" editable="bottom">
-                      <field name="asignatura_id" options="{'no_create': True}" readonly="1"/>
-                      <field name="alumno_id" options="{'no_create': True}" readonly="1"/>
-					  <field name="nota_parcial1" />
-					  <field name="nivelacion_1"/>
-					  <field name="nota_parcial2" />
-						<field name="nivelacion_2"/>
-					  <field name="nota_parcial3" />
-						<field name="nivelacion_3"/>
-					  <field name="nota_parcial4" />
-						<field name="nivelacion_4"/>
+					<field name="asignatura_id" options="{'no_create': True}" readonly="1"/>
+					<field name="alumno_id" options="{'no_create': True}" readonly="1"/>
+					<field name="nota_parcial1" />
+					<field name="nivelacion_1"/>
+					<field name="nota_parcial2" />
+					<field name="nivelacion_2"/>
+					<field name="nota_parcial3" />
+					<field name="nivelacion_3"/>
+					<field name="nota_parcial4" />
+					<field name="nivelacion_4"/>
                   </tree>
               </field>
           </page>
-		<page string="Sociabilidad y Comportamiento" attrs="{'invisible': [('prebasica_nota','=',False)]}">
+		<page string="Sociabilidad y Comportamiento" attrs="{'invisible': [('prebasica_nota','=',False), ('maestro_guia', '=', False)]}">
 			<field name="comportamiento_ids">
                   <tree string="Sociabilidad y Comportamiento" editable="bottom">
                       <field name="comportamiento_id" options="{'no_create': True}" readonly="1"/>
@@ -56,10 +57,30 @@
 					<field name="partipacion_4"/>
                   </tree>
              </field>
+		<group colspan="4">
+        <group cols="2"> 
+			<field name="inasistencias_1"/>
+			<field name="inasistencias_2"/>
+			<field name="inasistencias_3"/>
+			<field name="inasistencias_4"/>
+		</group>
+		  <group cols="2"> 
+		<field name="llegadas_1"/>
+			<field name="llegadas_2"/>
+			<field name="llegadas_3"/>
+			<field name="llegadas_4"/>
+		</group>
+      	</group>
 		</page>
-		<page string="Comentarios Generales" attrs="{'invisible': [('prebasica_nota','=',False)]}">
+		<page string="Comentarios Generales" attrs="{'invisible': [('prebasica_nota','=',False), ('maestro_guia', '=', False)]}">
 		<separator string="Comentarios I parcial"/>
 			<field name="comentarios_1" placeholder="Comentarios generales I parcial para el alumno"/>
+		<separator string="Comentarios II parcial"/>
+			<field name="comentarios_2" placeholder="Comentarios generales I parcial para el alumno"/>
+		<separator string="Comentarios III parcial"/>
+			<field name="comentarios_3" placeholder="Comentarios generales I parcial para el alumno"/>
+			<separator string="Comentarios IV parcial"/>
+			<field name="comentarios_4" placeholder="Comentarios generales I parcial para el alumno"/>
 		</page>
         </notebook>
       </sheet>

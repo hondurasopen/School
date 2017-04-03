@@ -44,7 +44,7 @@ class Sections(models.Model):
             self.prebasica = False
 
     def asignar_clases(self):
-        obj_section = self.env["school.sections"].search([('maestro_guia', '=', self.maestro_guia.id)])
+        obj_section = self.env["school.sections"].search([('maestro_guia', '=', self.maestro_guia.id), ('id', '!=', self.id)])
         if obj_section:
             raise Warning(_('El maestro ya tiene asigando sección, por favor seleccione un maestro que no se haya asigando a ninguna sección'))
 

@@ -2,7 +2,7 @@
 <openerp>
 <data>
 <template id="report_card_print_view_document">
-<!--<t t-call="report.external_layout">-->
+<t t-call="report.external_layout">
 <t t-foreach="docs" t-as="o">
  <div class="header">
 		<p><h2 class="text-center" style="font-weight:bold;">
@@ -13,7 +13,6 @@
 		</p>
 </div>
   <div class="page">  
- <hr />
 	<p><h4 class="text-center" style="font-weight:bold;">
 		ENGLAND SCHOOL
 		<br/>
@@ -22,18 +21,16 @@
 		</p>
  <hr />
 
- <table style="font-size:16px;width:100%; height:100px;">
+ <table style="font-size:14px;width:100%; height:100px;">
         <tr>
 		<td style="width:70%;"><strong> Name: </strong> <span t-field="o.student_id"/></td> 
-		<td style="width:30%;"><strong>Teacher: </strong></td>
+		<td style="width:30%;"><strong>Teacher: </strong> <span t-field="o.maestro_guia"/></td>
 		</tr>
         <tr><td style="width:40%;"><strong>Grade: </strong><span t-field="o.grade_id"/></td> 
         <td style="width:40%;"><strong>Section: </strong><span t-field="o.section_id"/>   
         </td></tr>
         
  </table>
- <hr />
-
 <table style="border:1px solid black;font-size:14px;width:100%; height:100px;">
 <thead style="background:gray;font-color:white;">
         <tr style="font-size:12px;">
@@ -52,6 +49,7 @@
 			<th class="text-center" style="width:7%;border:1px solid black;">Nivelación</th>
 			<th class="text-center" style="width:7%;border:1px solid black;">Total</th>  
         </tr>
+		
       </thead>
 <tbody class="invoice_tbody" style="font-size:12px;">
 		<tr t-foreach="o.report_card_ids" t-as="l">
@@ -103,8 +101,8 @@
 </table>
  <hr />
 <p><strong>PROMEDIOS POR PARCIAL</strong>
-</p>
- <table style="font-size:16px;width:100%; height:100px;">
+
+ <table style="font-size:14px;width:100%; height:100px;">
         <tr>
 		<td style="width:70%;"><strong>I PARCIAL: </strong> <span t-field="o.promedio_parcial1"/></td> 
 		<td style="width:30%;"><strong>II PARCIAL: </strong>  <span t-field="o.promedio_parcial2"/></td>
@@ -114,19 +112,17 @@
         </td></tr>
         
  </table>
- <hr />
+<strong> Sociabilidad y Comportamiento</strong></p>
 
-<p><strong> Sociabilidad y Comportamiento</strong></p>
-<br/>
 <table class="table table-condensed" style="border:1px solid black;font-size:14px;width:100%; height:100px;">
 	<thead style="background:gray;font-color:white;">
         <tr style="font-size:12px;">
             <!--<th>Item</th>-->
             <th class="text-center" style="width:40%;border:1px solid black;">Sociabilidad y Comportamiento</th>
-			<th class="text-center" style="width:10%;border:1px solid black;">I PARCIAL</th>              
-			<th class="text-center" style="width:10%;border:1px solid black;">II PARCIAL</th>   
-			<th class="text-center" style="width:10%;border:1px solid black;">III PARCIAL</th>   
-			<th class="text-center" style="width:10%;border:1px solid black;">IV PARCIAL</th>     
+			<th class="text-center" style="width:12%;border:1px solid black;">I PARCIAL</th>              
+			<th class="text-center" style="width:12%;border:1px solid black;">II PARCIAL</th>   
+			<th class="text-center" style="width:12%;border:1px solid black;">III PARCIAL</th>   
+			<th class="text-center" style="width:12%;border:1px solid black;">IV PARCIAL</th>     
         </tr>
       </thead>
 <tbody class="invoice_tbody" style="font-size:12px;">
@@ -153,27 +149,46 @@
 			</td>
 		</tr>
     </tbody>
+<thead style="background:gray;font-color:white;">
+        <tr style="font-size:12px;">
+            <!--<th>Item</th>-->
+            <th class="text-center" style="width:40%;border:1px solid black;">Inasistencias</th>
+			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.inasistencias_1"/></th>              
+			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.inasistencias_2"/></th>   
+			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.inasistencias_3"/></th>   
+			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.inasistencias_4"/></th>     
+        </tr>
+</thead>
+<thead style="background:gray;font-color:white;">
+        <tr style="font-size:12px;">
+            <!--<th>Item</th>-->
+            <th class="text-center" style="width:40%;border:1px solid black;">Llegadas Tarde</th>
+			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.llegadas_1"/></th>              
+			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.llegadas_2"/></th>   
+			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.llegadas_3"/></th>   
+			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.llegadas_4"/></th>     
+        </tr>
+</thead>
 </table>
  <hr />
-<p><strong>I PARCIAL COMENTARIOS</strong>
-</p>
-<p> <span t-field="o.comentarios_parcial_1"/></p>
- <hr />
-<p><strong>II PARCIAL COMENTARIOS</strong>
-</p>
-<p><span t-field="o.comentarios_parcial_2"/> </p>
- <hr />
-<p><strong>III PARCIAL COMENTARIOS</strong>
-</p>
-<p><span t-field="o.comentarios_parcial_3"/> </p>
-<hr />
-<p><strong>IV PARCIAL COMENTARIOS</strong>
-</p>
-<p><span t-field="o.comentarios_parcial_4"/> </p>
-<hr />
+	<p><strong>COMENTARIOS I PARCIAL</strong>
+	<br/><span t-field="o.comentarios_parcial_1"/><br/>
+	</p>
+	<p><strong>COMENTARIOS II PARCIAL</strong>
+	<br/><span t-field="o.comentarios_parcial_2"/> <br/>
+	</p>
+
+	<p><strong>COMENTARIOS III PARCIAL</strong>
+	<br/><span t-field="o.comentarios_parcial_3"/> <br/>
+	</p>
+
+	<p><strong>COMENTARIOS IV PARCIAL</strong>
+	<br/><span t-field="o.comentarios_parcial_4"/> <br/>
+	</p>
+	
 </div>
 </t>
-<!--</t>-->
+</t> <!-- Fin de external layout -->
 </template>
 
 <template id="report_card_print_view">

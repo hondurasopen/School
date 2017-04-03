@@ -15,6 +15,7 @@
       <group colspan="4">
         <group cols="2"> 
             <field name="student_id"/>
+			<field name="maestro_guia"/>
         </group>
 		 <group cols="2">
 			<field name="grade_id"/>
@@ -66,18 +67,50 @@
 		 <page string="Comentarios I Parcial">
 			<separator string="Comentarios I Parcial"/>
 			<field name="comentarios_parcial_1" placeholder="Comentarios de primer parcial"/>
+			<group colspan="4">
+        		<group cols="2"> 
+            		<field name="inasistencias_1"/>
+        	</group>
+			<group cols="2"> 
+            		<field name="llegadas_1"/>
+        	</group>
+			</group>
 		</page>
 		<page string="Comentarios 2 Parcial">
 			<separator string="Comentarios 2 Parcial"/>
 			<field name="comentarios_parcial_2" placeholder="Comentarios de segundo parcial"/>
+			<group colspan="4">
+        		<group cols="2"> 
+            		<field name="inasistencias_2"/>
+        	</group>
+			<group cols="2"> 
+            		<field name="llegadas_2"/>
+        	</group>
+			</group>
 		</page>
 		<page string="Comentarios 3 Parcial">
 			<separator string="Comentarios 3 Parcial"/>
 			<field name="comentarios_parcial_3" placeholder="Comentarios de tercer parcial"/>
+			<group colspan="4">
+        		<group cols="2"> 
+            		<field name="inasistencias_3"/>
+        	</group>
+			<group cols="2"> 
+            		<field name="llegadas_3"/>
+        	</group>
+			</group>
 		</page>
 		<page string="Comentarios 4 Parcial">
 			<separator string="Comentarios 4 Parcial"/>
 			<field name="comentarios_parcial_4" placeholder="Comentarios de cuarto parcial"/>
+			<group colspan="4">
+        		<group cols="2"> 
+            		<field name="inasistencias_4"/>
+        	</group>
+			<group cols="2"> 
+            		<field name="llegadas_4"/>
+        	</group>
+			</group>
 		</page>
         </notebook>
       </sheet>
