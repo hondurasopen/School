@@ -2,22 +2,22 @@
 <odoo>
    <data>
   <!-- Vista Formulario de Section-->
-   <record model="ir.ui.view" id="school_section_form_view">
-   <field name="name">school.section.form</field>
-   <field name="model">school.sections</field>
-   <field name="arch" type="xml">
-     <form string="Formulario de secciones">
+<record model="ir.ui.view" id="school_section_form_view">
+<field name="name">school.section.form</field>
+<field name="model">school.sections</field>
+<field name="arch" type="xml">
+<form string="Formulario de secciones">
 		<header>
-	<button name="action_section_progress" type="object" string="Habilitar Sección" states="draft,done" class="oe_highlight oe_read_only"/>
+<button name="action_section_progress" type="object" string="Habilitar Sección" states="draft,done" class="oe_highlight oe_read_only"/>
 <button name="action_section_draft" type="object" string="Borrador" states="cancel" class="oe_highlight oe_read_only"/>
 <button name="action_section_cancel" type="object" string="Cancelar Sección" states="progress" class="oe_highlight oe_read_only"/>
 <button name="action_section_done" type="object" string="Finalizar Sección" states="draft,progress" class="oe_highlight oe_read_only"/>
 		<field name="state" widget="statusbar" nolabel="1" clickable="1"/>
 	</header>				
   <sheet>  
-   <h1>
+   	<h1>
       <field name="name" placeholder="Nombre de Sección..." class="oe_inline"/>
-  </h1>
+  	</h1>
 	<separator string="Información"/>
     <group colspan="4">
 		<group cols="2">  
@@ -27,7 +27,7 @@
 	<group cols="2"> 
 			<field name="course_id" options="{'no_create': True}"/>
 			<field name="prebasica" invisible="1"/>
-			<field name="maestro_guia" required="1"/><!--attrs="{'required': [('prebasica','=',True)]}"/>-->
+			<field name="maestro_guia" required="1" options="{'no_create': True}"/><!--attrs="{'required': [('prebasica','=',True)]}"/>-->
 			<button name="asignar_clases" class="oe_highlight" string="Asignar clases" type="object" attrs="{'invisible': ['|',('state','in',['progress','done']) ]}"/>
 	</group>
 	</group>		
@@ -36,13 +36,13 @@
 	<field name="section_line">
 	<tree editable="bottom">
 		<field name="asignatura_id" required="1" readonly="1"/>
-		<field name="maestro_id" required="1" domain="[('es_catadratico','=',True)]" />
+		<field name="maestro_id" required="1" domain="[('es_catadratico','=',True)]" options="{'no_create': True}" />
 		<field name="name"/>
 	</tree>
 	</field>
 	</page>
 	<page string="Alumnos">
-		<field name="alumnos_ids">
+		<field name="alumnos_ids" readonly="1">
 		<tree editable="top">
 			<field name="name"/>
 			<field name="partida_nacimiento"/>
@@ -66,11 +66,12 @@
    <field name="model">school.sections</field>
    <field name="arch" type="xml">
        <tree string="Secciones" colors="blue:state == 'draft';green:state=='progress';red:state == 'cancel'">
-          <field name="name"/>
-          <field name="start_date"/>
-      		<field name="end_date"/>
-      		<field name="course_id"/>
-      		<field name="state"/>
+			<field name="name"/>
+			<field name="start_date"/>
+			<field name="end_date"/>
+			<field name="maestro_guia"/>
+			<field name="course_id"/>
+			<field name="state"/>
       </tree>
    </field> 
    </record>

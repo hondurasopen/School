@@ -65,19 +65,19 @@
           </page>
 		 <page string="Comentarios I Parcial">
 			<separator string="Comentarios I Parcial"/>
-			<field name="comentarios_1" placeholder="Comentarios de primer parcial"/>
+			<field name="comentarios_parcial_1" placeholder="Comentarios de primer parcial"/>
 		</page>
 		<page string="Comentarios 2 Parcial">
 			<separator string="Comentarios 2 Parcial"/>
-			<field name="comentarios_2" placeholder="Comentarios de segundo parcial"/>
+			<field name="comentarios_parcial_2" placeholder="Comentarios de segundo parcial"/>
 		</page>
 		<page string="Comentarios 3 Parcial">
 			<separator string="Comentarios 3 Parcial"/>
-			<field name="comentarios_3" placeholder="Comentarios de tercer parcial"/>
+			<field name="comentarios_parcial_3" placeholder="Comentarios de tercer parcial"/>
 		</page>
 		<page string="Comentarios 4 Parcial">
 			<separator string="Comentarios 4 Parcial"/>
-			<field name="comentarios_3" placeholder="Comentarios de cuarto parcial"/>
+			<field name="comentarios_parcial_4" placeholder="Comentarios de cuarto parcial"/>
 		</page>
         </notebook>
       </sheet>

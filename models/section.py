@@ -1,8 +1,6 @@
 # -*- encoding: utf-8 -*-
 from odoo import models, fields, api , _
-from odoo.exceptions import Warning, RedirectWarning
-from datetime import datetime, date, time, timedelta
-import calendar
+from odoo.exceptions import Warning
 
 
 class Sections(models.Model):
@@ -46,6 +44,10 @@ class Sections(models.Model):
             self.prebasica = False
 
     def asignar_clases(self):
+        obj_section = self.env["school.sections"].search([('maestro_guia', '=', self.maestro_guia.id)])
+        if obj_section:
+            raise Warning(_('El maestro ya tiene asigando sección, por favor seleccione un maestro que no se haya asigando a ninguna sección'))
+
         obj_line = self.env["school.sections.line"]
         obj_unlink = obj_line.search([('section_id', '=', self.id)])
         if self.section_line:

@@ -157,20 +157,20 @@
  <hr />
 <p><strong>I PARCIAL COMENTARIOS</strong>
 </p>
-<p> <span t-field="o.comentarios_1"/></p>
+<p> <span t-field="o.comentarios_parcial_1"/></p>
  <hr />
 <p><strong>II PARCIAL COMENTARIOS</strong>
 </p>
-<p><span t-field="o.comentarios_2"/> </p>
+<p><span t-field="o.comentarios_parcial_2"/> </p>
  <hr />
 <p><strong>III PARCIAL COMENTARIOS</strong>
 </p>
-<p><span t-field="o.comentarios_3"/> </p>
+<p><span t-field="o.comentarios_parcial_3"/> </p>
 <hr />
 <p><strong>IV PARCIAL COMENTARIOS</strong>
 </p>
-<p><span t-field="o.comentarios_4"/> </p>
-
+<p><span t-field="o.comentarios_parcial_4"/> </p>
+<hr />
 </div>
 </t>
 <!--</t>-->

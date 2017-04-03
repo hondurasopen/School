@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from openerp import models, fields, api, _
+from odoo import models, fields, api, _
 from odoo.exceptions import Warning
 
 
@@ -17,10 +17,10 @@ class Reportcard(models.Model):
     promedio_parcial2 = fields.Float("Promedio Parcial 2")
     promedio_parcial3 = fields.Float("Promedio Parcial 3")
     promedio_parcial4 = fields.Float("Promedio Parcial 4")
-    comentarios_1 = fields.Text("Comentarios primer parcial")
-    comentarios_2 = fields.Text("Comentarios segundo parcial")
-    comentarios_3 = fields.Text("Comentarios tercer parcial")
-    comentarios_4 = fields.Text("Comentarios cuarto parcial")
+    comentarios_parcial_4 = fields.Text("Comentarios cuarto parcial")
+    comentarios_parcial_1 = fields.Text("Comentarios primer parcial")
+    comentarios_parcial_2 = fields.Text("Comentarios segundo parcial")
+    comentarios_parcial_3 = fields.Text("Comentarios tercer parcial")
     comportamiento_ids = fields.One2many("school.notas.line.comportamiento", "report_card_id", "Sociabilidad y Comportamiento")
 
     @api.onchange("student_id")
