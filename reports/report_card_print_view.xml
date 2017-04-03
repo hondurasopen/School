@@ -2,25 +2,41 @@
 <openerp>
 <data>
 <template id="report_card_print_view_document">
-<t t-call="report.external_layout">
+<t t-call="report.html_container">
 <t t-foreach="docs" t-as="o">
  <div class="header">
-		<p><h2 class="text-center" style="font-weight:bold;">
-		ENGLAND SCHOOL
-		<br/>
-		REPORT CARD 2016-2017
-		</h2>
-		</p>
-</div>
-  <div class="page">  
-	<p><h4 class="text-center" style="font-weight:bold;">
-		ENGLAND SCHOOL
-		<br/>
-		REPORT CARD 2016-2017
-		</h4>
-		</p>
- <hr />
+<div class="row">
+    <!--col-xs-3 -->    
+           <table style="width:100%;height:90px;">
+            <tr>
+            <td style="width:35%;font-size:11px;">
+                    <p>
+                        <strong>ESCALA DE EVALUACIÓN:</strong><br/>
+                    </p>
+                    <p>
+                    <span>E= Excellent/Avanzado (91-100)</span><br/>
+                    <span>VG= Very Good/Muy Satisfactorio (81-90)</span><br/>
+                    <span>S= Satisfactory/Satisfactorio (70-80)</span><br/>
+					<span>N.I.=Needs to improve/Necesita Mejorar (36-69)</span><br/>
+					<span>U= Unsatisfactory/Insatisfactorio (1-35)</span><br/>	
+                </p>
+            </td>
+			<td style="width:30%;font-weight:bold;" class="text-center">
+				<h4> <strong>ENGLAND SCHOOL<br/>
+					REPORT CARD 2016-2017
+					</strong></h4>
+             </td>
+			<td style="width:35%;font-weight:bold;">
+					
+             </td>
+            </tr>
+          </table>
+        <!-- Aqui pongo la address  <div class="col-xs-9 text-right" style="margin-top:20px;" t-field="company.rml_header1"/>-->     
+    </div>
 
+</div>
+<div class="page">  
+ <hr />
  <table style="font-size:14px;width:100%; height:100px;">
         <tr>
 		<td style="width:70%;"><strong> Name: </strong> <span t-field="o.student_id"/></td> 
@@ -32,7 +48,7 @@
         
  </table>
 <table style="border:1px solid black;font-size:14px;width:100%; height:100px;">
-<thead style="background:gray;font-color:white;">
+<thead style="background:yellow;font-color:white;">
         <tr style="font-size:12px;">
             <!--<th>Item</th>-->
             <th class="text-center" style="width:16%;border:1px solid black;">Clases/Classes</th>
@@ -115,58 +131,58 @@
 <strong> Sociabilidad y Comportamiento</strong></p>
 
 <table class="table table-condensed" style="border:1px solid black;font-size:14px;width:100%; height:100px;">
-	<thead style="background:gray;font-color:white;">
+	<thead style="background:yellow;font-color:white;">
         <tr style="font-size:12px;">
             <!--<th>Item</th>-->
-            <th class="text-center" style="width:40%;border:1px solid black;">Sociabilidad y Comportamiento</th>
-			<th class="text-center" style="width:12%;border:1px solid black;">I PARCIAL</th>              
-			<th class="text-center" style="width:12%;border:1px solid black;">II PARCIAL</th>   
-			<th class="text-center" style="width:12%;border:1px solid black;">III PARCIAL</th>   
-			<th class="text-center" style="width:12%;border:1px solid black;">IV PARCIAL</th>     
+            <th class="text-center" style="width:35%;border:1px solid black;">Sociabilidad y Comportamiento</th>
+			<th class="text-center" style="width:14%;border:1px solid black;">I PARCIAL</th>              
+			<th class="text-center" style="width:14%;border:1px solid black;">II PARCIAL</th>   
+			<th class="text-center" style="width:14%;border:1px solid black;">III PARCIAL</th>   
+			<th class="text-center" style="width:14%;border:1px solid black;">IV PARCIAL</th>     
         </tr>
       </thead>
 <tbody class="invoice_tbody" style="font-size:12px;">
 		<tr t-foreach="o.comportamiento_ids" t-as="l">
 		<!--<td></td>-->
-			<td class="text-center" style="width:40%;;border:1px solid black;">
+			<td class="text-center" style="width:35%;;border:1px solid black;">
 			<span t-field="l.comportamiento_id"/>
 			</td>
-			<td class="text-center" style="width:10%;;border:1px solid black;">
+			<td class="text-center" style="width:14%;;border:1px solid black;">
 			<span t-field="l.partipacion_1" />
 		
 			</td>
-			<td class="text-center" style="width:10%;;border:1px solid black;">
+			<td class="text-center" style="width:14%;;border:1px solid black;">
 			<span t-field="l.partipacion_2"/>
 			
 			</td>
-			<td style="width:10%;border:1px solid black;" class="text-center">
+			<td style="width:14%;border:1px solid black;" class="text-center">
 			<span t-field="l.partipacion_3"/>
 			
 			</td>
-			<td style="width:10%;border:1px solid black;" class="text-center">
+			<td style="width:14%;border:1px solid black;" class="text-center">
 			<span t-field="l.partipacion_4"/>
 			
 			</td>
 		</tr>
     </tbody>
-<thead style="background:gray;font-color:white;">
+<thead>
         <tr style="font-size:12px;">
             <!--<th>Item</th>-->
-            <th class="text-center" style="width:40%;border:1px solid black;">Inasistencias</th>
-			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.inasistencias_1"/></th>              
-			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.inasistencias_2"/></th>   
-			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.inasistencias_3"/></th>   
-			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.inasistencias_4"/></th>     
+            <th class="text-center" style="width:35%;border:1px solid black;">Inasistencias</th>
+			<th class="text-center" style="width:14%;border:1px solid black;"><span t-field="o.inasistencias_1"/></th>              
+			<th class="text-center" style="width:14%;border:1px solid black;"><span t-field="o.inasistencias_2"/></th>   
+			<th class="text-center" style="width:14%;border:1px solid black;"><span t-field="o.inasistencias_3"/></th>   
+			<th class="text-center" style="width:14%;border:1px solid black;"><span t-field="o.inasistencias_4"/></th>     
         </tr>
 </thead>
-<thead style="background:gray;font-color:white;">
+<thead>
         <tr style="font-size:12px;">
             <!--<th>Item</th>-->
-            <th class="text-center" style="width:40%;border:1px solid black;">Llegadas Tarde</th>
-			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.llegadas_1"/></th>              
-			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.llegadas_2"/></th>   
-			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.llegadas_3"/></th>   
-			<th class="text-center" style="width:12%;border:1px solid black;"><span t-field="o.llegadas_4"/></th>     
+            <th class="text-center" style="width:35%;border:1px solid black;">Llegadas Tarde</th>
+			<th class="text-center" style="width:14%;border:1px solid black;"><span t-field="o.llegadas_1"/></th>              
+			<th class="text-center" style="width:14%;border:1px solid black;"><span t-field="o.llegadas_2"/></th>   
+			<th class="text-center" style="width:14%;border:1px solid black;"><span t-field="o.llegadas_3"/></th>   
+			<th class="text-center" style="width:14%;border:1px solid black;"><span t-field="o.llegadas_4"/></th>     
         </tr>
 </thead>
 </table>
@@ -188,7 +204,7 @@
 	
 </div>
 </t>
-</t> <!-- Fin de external layout -->
+</t> <!-- Fin de t call -->
 </template>
 
 <template id="report_card_print_view">
