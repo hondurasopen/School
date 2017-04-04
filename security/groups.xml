@@ -1,12 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="england_school_manager" model="res.groups">
-            <field name="name">Administrador school</field>
-        </record>
+		<record model="ir.module.category" id="module_school_manager">
+            <field name="name">Permisos Modulo de Escuela</field>
+            <field name="description">Fletes y Precios</field>
+            <field name="sequence">4</field>
+		</record>
 
-        <record id="england_school_user" model="res.groups">
-            <field name="name">Usuario restringido school</field>
-        </record>
+		<!-- Asignaturas persmisos -->
+		<record id="modulo_school_manager_asignatura" model="res.groups">
+			<field name="category_id" ref="module_school_manager"/>
+			<field name="name">Manager Asignaturas</field>
+		</record>
+
+		<record id="modulo_school_user_asignatura" model="res.groups">
+			<field name="category_id" ref="module_school_manager"/>
+			<field name="name">Usuario Restringido asignaturas</field>
+		</record>
+
+		<!-- Cursos persmisos -->
+		<record id="modulo_school_manager_curso" model="res.groups">
+			<field name="category_id" ref="module_school_manager"/>
+			<field name="name">Manager Cursos</field>
+		</record>
+
+		<record id="modulo_school_user_curso" model="res.groups">
+			<field name="category_id" ref="module_school_manager"/>
+			<field name="name">Usuario Restringido cursos</field>
+		</record>
+
+			<!-- Secciones persmisos -->
+		<record id="modulo_school_manager_secciones" model="res.groups">
+			<field name="category_id" ref="module_school_manager"/>
+			<field name="name">Manager Secciones</field>
+		</record>
+
+		<record id="modulo_school_user_secciones" model="res.groups">
+			<field name="category_id" ref="module_school_manager"/>
+			<field name="name">Usuario Restringido secciones</field>
+		</record>
+
+	<!-- Notas persmisos -->
+		<record id="modulo_manager_school_notas" model="res.groups">
+			<field name="category_id" ref="module_school_manager"/>
+			<field name="name">Manager Registros de Notas</field>
+		</record>
+
+		<record id="modulo_user_school_notas" model="res.groups">
+			<field name="category_id" ref="module_school_manager"/>
+			<field name="name">Usuario Restringido de notas</field>
+		</record>
+	
+	<!-- Generar Notas persmisos -->
+		<record id="school_report_card_manager" model="res.groups">
+			<field name="category_id" ref="module_school_manager"/>
+			<field name="name">Manager Report Card</field>
+		</record>
+
+		<record id="school_report_card_user" model="res.groups">
+			<field name="category_id" ref="module_school_manager"/>
+			<field name="name">Usuario Restringido Report Card</field>
+		</record>
+
     </data>
 </odoo>

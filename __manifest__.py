@@ -16,8 +16,8 @@
     "description": """
     """,
     'data': [
-	 #"security/groups.xml",
-     #"security/ir.model.access.csv",
+	"security/groups.xml",
+    "security/ir.model.access.csv",
 	"views/school_menus.xml",
 	"views/course_view.xml",
 	"views/asignatura_view.xml",
