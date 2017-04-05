@@ -22,9 +22,11 @@
                 </p>
             </td>
 			<td style="width:30%;font-weight:bold;" class="text-center">
-				<h4> <strong>ENGLAND SCHOOL<br/>
-					REPORT CARD 2016-2017
-					</strong></h4>
+				<h4> <strong>Enlgand School<br/>
+					Report Card 2016-2017<br/>
+					
+					<span t-field="o.grade_id.nivel"/> </strong> 
+					</h4>
              </td>
 			<td style="width:35%;font-weight:bold;" class="text-right">
 				<img t-if="user.company_id.logo" t-att-src="'data:image/png;base64,%s' % user.company_id.logo" style="height:100px;"/>
@@ -39,15 +41,34 @@
  <hr />
  <table style="font-size:14px;width:100%; height:100px;">
         <tr>
-		<td style="width:70%;"><strong> Name: </strong> <span t-field="o.student_id"/></td> 
-		<td style="width:30%;"><strong>Teacher: </strong> <span t-field="o.maestro_guia"/></td>
+		<td style="width:60%;"><strong> Name: </strong> <span t-field="o.student_id"/></td> 
+		<td style="width:40%;"><span t-if="o.grade_id.nivel in  ['prebasica', 'prebasica2', 'prebasica3', 'basica']"> <strong>Teacher: </strong> <span t-field="o.maestro_guia"/></span></td>
 		</tr>
-        <tr><td style="width:40%;"><strong>Grade: </strong><span t-field="o.grade_id"/></td> 
+        <tr><td style="width:60%;"><strong>Grade: </strong><span t-field="o.grade_id"/></td> 
         <td style="width:40%;"><strong>Section: </strong><span t-field="o.section_id"/>   
         </td></tr>
         
  </table>
-<table style="border:1px solid black;font-size:14px;width:100%; height:100px;">
+<table style="font-size:14px;width:100%; height:100px;">
+<thead style="background:yellow;font-color:white;">
+        <tr style="font-size:12px;">
+            <!--<th>Item</th>-->
+            <th class="text-center" style="width:16%; background:white; "></th>
+			<th class="text-center"  style="width:7%;border:1px solid black;">  </th>              
+			<th class="text-center"  style="width:21%;border:1px solid black;" >I Parcial</th>
+			<th class="text-center" style="width:7%;border:1px solid black;"></th>   
+			<th class="text-center" style="width:7%;border:1px solid black;"> </th>              
+			<th class="text-center" style="width:7%;border:1px solid black;">II Parcial</th>
+			<th class="text-center" style="width:7%;border:1px solid black;"></th>  
+			<th class="text-center" style="width:7%;border:1px solid black;"> </th>              
+			<th class="text-center" style="width:7%;border:1px solid black;">III Parcial</th>
+			<th class="text-center" style="width:7%;border:1px solid black;"></th>  
+			<th class="text-center" style="width:7%;border:1px solid black;"> </th>              
+			<th class="text-center" style="width:7%;border:1px solid black;">IV Parcial</th>
+			<th class="text-center" style="width:7%;border:1px solid black;"></th>                
+        </tr>		
+</thead>
+
 <thead style="background:yellow;font-color:white;">
         <tr style="font-size:12px;">
             <!--<th>Item</th>-->

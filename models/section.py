@@ -11,7 +11,7 @@ class Sections(models.Model):
     start_date = fields.Date("Fecha de inicio", required=True)
     end_date = fields.Date("Fecha final", required=True)
     prebasica = fields.Boolean("Pre Básica", default=False)
-    maestro_guia = fields.Many2one("hr.employee", "Maestro Guia" , domain="[('maestro_guia', '=', True)]")
+    maestro_guia = fields.Many2one("hr.employee", "Maestro Guia" )
     description = fields.Text("Description and notes")
     state = fields.Selection([('draft', 'Borrador'), ('progress', 'En progreso'), ('cancel', 'Cancelada'), ('done', 'Finalizada')], string='Estado', default='draft')
     description = fields.Text("Observaciones generales")
@@ -38,7 +38,8 @@ class Sections(models.Model):
 
     @api.onchange("course_id")
     def onchangecurso(self):
-        if self.course_id.nivel == 'prebasica' or self.course_id.nivel == 'basica':
+        #if self.course_id.nivel == 'prebasica' or self.course_id.nivel == 'prebasica2' or self.course_id.nivel == 'prebasica3' or self.course_id.nivel == 'basica':
+        if self.course_id.nivel in ['prebasica', 'prebasica2', 'prebasica3', 'basica']:
             self.prebasica = True
         else:
             self.prebasica = False

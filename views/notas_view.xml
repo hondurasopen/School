@@ -150,12 +150,26 @@
    </field>    
 </record>
 
+<!--  Accion para Notas de prebasica -->
+   <record model="ir.actions.act_window" id="escuela_notas_action_especiales_pre">
+   <field name="name">Registro de calificaciones</field>
+   <field name="res_model">school.notas</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+	
+   <field name="help" type="html">
+   		<p class="oe_view_nocontent_create">Crear el primer calificación</p>
+   </field>
+   </record>
+
+
    <!--  Accion para Notas de secundaria -->
    <record model="ir.actions.act_window" id="escuela_notas_action_especiales">
    <field name="name">Registro de calificaciones</field>
    <field name="res_model">school.notas</field>
    <field name="view_type">form</field>
    <field name="view_model">tree,form</field>
+	<field name="domain">[('nivel_escolar','in',['media2', 'media3'])]</field>
 	 <field name="view_id" ref="school_tree_especial_notas"/>
 	<!--<field name="context">{'default_nivel_section': 'media'}</field>-->
    <field name="help" type="html">
@@ -195,7 +209,7 @@
    <field name="res_model">school.notas</field>
    <field name="view_type">form</field>
    <field name="view_model">tree,form</field>
-	<field name="domain">[('nivel_escolar','=','prebasica')]</field>
+	<field name="domain">[('nivel_escolar','in',['prebasica', 'prebasica2',  'prebasica3'])]</field>
 	 <field name="view_id" ref="school_notas_tree_base_view"/>
 	<field name="context">{'default_nivel_escolar':'prebasica', 'default_prebasica_nota':1}</field>
    <field name="help" type="html">
@@ -203,9 +217,11 @@
    </field>
    </record>
    <!-- Menu Principal de Gestion de cuotas -->
-<menuitem action="escuela_notas_action_especiales" id="school_maestros_clases_especiales" string="Calificaciones Clases Especiales" name="Calificaciones Clases Especiales" parent="school_maestros_main" sequence="40"/>
+<menuitem action="escuela_notas_action_especiales_pre" id="school_maestros_clases_especiales_pre" string="Calificaciones Clases Especiales Pre-básica" name="Calificaciones Clases Especiales Pre-básica" parent="school_maestros_main" sequence="45"/>
 
-<menuitem action="escuela_notas_action_media" id="school_notas_action" string="Calificaciones Secundaria" name="Calificaciones Secundaria" parent="school_maestros_main" sequence="30"/>
+<menuitem action="escuela_notas_action_especiales" id="school_maestros_clases_especiales" string="Calificaciones High School" name="Calificaciones High School" parent="school_maestros_main" sequence="40"/>
+
+<menuitem action="escuela_notas_action_media" id="school_notas_action" string="Calificaciones Middle School" name="Calificaciones Middle School" parent="school_maestros_main" sequence="30"/>
 
 <menuitem action="escuela_notas_action_basica" id="school_notas_action_primaria" string="Calificaciones Home Teacher Primaria" name="Calificaciones Home Teacher Primaria" parent="school_maestros_main" sequence="20"/>
 

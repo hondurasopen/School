@@ -14,14 +14,14 @@
 	<group colspan="4">
         <group cols="2"> 
             <field name="nivel"/>
-			<field name="home_teacher" attrs="{'invisible': [('nivel', '=', 'media')]}"/>
+			<field name="home_teacher" attrs="{'invisible': [('nivel', 'in', ['media', 'media2', 'media3'])]}"/>
         </group>
 		  <group cols="2"> 
             <field name="area_asignatura"/>
         </group>
     </group>		
 	<notebook>
-      <page string="Asignación de maestros" attrs="{'invisible': [('nivel', 'in', ['prebasica', 'basica']), '|', ('home_teacher','=', True)]}">
+      <page string="Asignación de maestros" attrs="{'invisible': [('nivel', 'in', ['prebasica', 'prebasica2', 'basica', 'prebasica3']), '|', ('home_teacher','=', True)]}">
 	<field name="asignatura_line">
 	<tree editable="top">
 	<field name="catedratico_id"/>
@@ -49,16 +49,41 @@
    </field> 
    </record>
 
-   <!--  Accion para Sections -->
+   <!--  Accion para Asignaturas Nursery -->
    <record model="ir.actions.act_window" id="school_asignatura_action_pre">
-   <field name="name">Asignaturas</field>
+   <field name="name">Asignaturas Nursery</field>
    <field name="res_model">school.asignatura</field>
    <field name="view_type">form</field>
    <field name="view_model">tree,form</field>
    <field name="domain">[('nivel','=','prebasica')]</field>
 	<field name="context">{'default_nivel': 'prebasica','default_home_teacher': 1}</field>
    <field name="help" type="html">
-   <p class="oe_view_nocontent_create">Crear primera asignaturas</p>
+   <p class="oe_view_nocontent_create">Crear primera asignatura</p>
+   </field>
+   </record>
+
+  <!--  Accion para Asignaturas Pre Kinder -->
+   <record model="ir.actions.act_window" id="school_asignatura_action_pre2">
+   <field name="name">Asignaturas Pre-Kinder</field>
+   <field name="res_model">school.asignatura</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+   <field name="domain">[('nivel','=','prebasica2')]</field>
+	<field name="context">{'default_nivel': 'prebasica2','default_home_teacher': 1}</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera asignatura</p>
+   </field>
+   </record>
+
+	  <record model="ir.actions.act_window" id="school_asignatura_action_pre3">
+   <field name="name">Asignaturas Kinder</field>
+   <field name="res_model">school.asignatura</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+   <field name="domain">[('nivel','=','prebasica3')]</field>
+	<field name="context">{'default_nivel': 'prebasica3','default_home_teacher': 1}</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera asignatura</p>
    </field>
    </record>
 
@@ -77,7 +102,7 @@
 
 <!--  Accion para Sections -->
    <record model="ir.actions.act_window" id="school_asignatura_action_high">
-   <field name="name">Asignaturas</field>
+   <field name="name">Asignaturas Middle School</field>
    <field name="res_model">school.asignatura</field>
    <field name="view_type">form</field>
    <field name="view_model">tree,form</field>
@@ -88,16 +113,48 @@
    </field>
    </record>
 
+<!--  Accion para Sections -->
+   <record model="ir.actions.act_window" id="school_asignatura_action_high2">
+   <field name="name">Asignaturas Middle School 10th</field>
+   <field name="res_model">school.asignatura</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+   <field name="domain">[('nivel','=','media2')]</field>
+	<field name="context">{'default_nivel': 'media2'}</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera asignatura</p>
+   </field>
+   </record>
 
+<!--  Accion para Sections -->
+   <record model="ir.actions.act_window" id="school_asignatura_action_high3">
+   <field name="name">Asignaturas Middle School 11th</field>
+   <field name="res_model">school.asignatura</field>
+   <field name="view_type">form</field>
+   <field name="view_model">tree,form</field>
+   <field name="domain">[('nivel','=','media3')]</field>
+	<field name="context">{'default_nivel': 'media3'}</field>
+   <field name="help" type="html">
+   <p class="oe_view_nocontent_create">Crear primera asignatura</p>
+   </field>
+   </record>
 	
    <!-- Menu Principal de Gestion de sections -->
 <menuitem string="Asignaturas" id="school_asignatura_main" name="Gestión de Asignaturas" parent="school_menu_main" sequence="50"/>
 
-<menuitem action="school_asignatura_action_pre" string="Asignaturas Pre-Básica" id="school_action_asignatura1" name="Asignaturas Pre-Básica" parent="school_asignatura_main" sequence="10"/>
+<menuitem action="school_asignatura_action_pre" string="Asignaturas Nursery" id="school_action_asignatura1" name="Asignaturas Nursery" parent="school_asignatura_main" sequence="10"/>
 
-<menuitem action="school_asignatura_action_basica" string="Asignaturas Básica" id="school_action_asignatura2" name="Asignaturas Primaria" parent="school_asignatura_main" sequence="20"/>
+<menuitem action="school_asignatura_action_pre2" string="Asignaturas Pre-Kinder" id="school_action_asig_pre2" name="Asignaturas Pre-Kinder" parent="school_asignatura_main" sequence="12"/>
 
-<menuitem action="school_asignatura_action_high" string="Asignaturas Media" id="school_asignatura_media" name="Asignaturas Media" parent="school_asignatura_main" sequence="30"/>
+<menuitem action="school_asignatura_action_pre3" string="Asignaturas Kinder" id="school_action_asig_pre3" name="Asignaturas Kinder" parent="school_asignatura_main" sequence="15"/>
+
+<menuitem action="school_asignatura_action_basica" string="Asignaturas Básica" id="school_action_asignatura2" name="Asignaturas Primaria 1 - 6th" parent="school_asignatura_main" sequence="20"/>
+
+<menuitem action="school_asignatura_action_high" string="Asignaturas Middle School" id="school_asignatura_media" name="Asignaturas Media 7th - 9th" parent="school_asignatura_main" sequence="30"/>
+
+<menuitem action="school_asignatura_action_high2" string="Asignaturas High School 10th" id="school_asignatura_media_high" name="Asignaturas High School 10th" parent="school_asignatura_main" sequence="35"/>
+
+<menuitem action="school_asignatura_action_high3" string="Asignaturas High School 11th" id="school_asignatura_media_high3" name="Asignaturas High School 11th" parent="school_asignatura_main" sequence="40"/>
 
 
 <!--  Accion para Sections -->

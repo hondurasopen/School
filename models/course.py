@@ -9,7 +9,8 @@ class Course(models.Model):
     name = fields.Char("Nombre del grado", required=True)
     description = fields.Text("Descripción del grado")
     activo = fields.Boolean("Curso activo", default=True)
-    nivel = fields.Selection([('prebasica', 'Pre-Básica'), ('basica', 'Básica'), ('media', 'Media')], required=True)
+    nivel = fields.Selection([('prebasica', 'PRE SCHOOL LEVEL 1'), ('prebasica2', 'PRE SCHOOL LEVEL 2'), ('prebasica3', 'PRE SCHOOL LEVEL 3'),('basica', 'ELEMENTARY LEVEL 1'),
+        ('media', 'MIDDLE SCHOOL'), ('media2', 'HIGH SCHOOL 10th'), ('media3', 'HIGH SCHOOL 11th')],required=True)
     section_ids = fields.One2many("school.sections", "course_id", "Secciones")
     curso_line = fields.One2many("school.course.line", "curso_id", "Detalles del grado")
 

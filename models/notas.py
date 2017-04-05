@@ -13,7 +13,8 @@ class NotasAlumno(models.Model):
         if obj_maestro:
             return obj_maestro
 
-    nivel_escolar = fields.Selection([('prebasica', 'Pre-Básica'), ('basica', 'Básica'), ('media', 'Media')])
+    nivel_escolar = fields.Selection([('prebasica', 'Pre School Level 1'), ('prebasica2', 'Pre School Level 2'), ('prebasica3', 'Pre School Level 3'),('basica', 'Elementary Level 1'),
+        ('media', 'Middle School'), ('media2', 'High School 10th'), ('media3', 'High School 11th')])
     comentarios_1 = fields.Text("Notas generales")
     comentarios_2 = fields.Text("Notas generales")
     comentarios_3 = fields.Text("Notas generales")
